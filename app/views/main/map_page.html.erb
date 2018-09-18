@@ -1,0 +1,357 @@
+<html>
+    <head>
+        <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=5uQbAffakTOIS4lajJId&submodules=geocoder"></script>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        
+        
+        <style>
+      /*      @media (min-width: 768px){*/
+      /*          html {*/
+      /*              position: relative;*/
+      /*              min-height: 100%;*/
+      /*              margin: 0;*/
+      /*          }*/
+      /*          body {*/
+      /*              min-height: 100%;*/
+      /*          }*/
+      /*      }*/
+      /*      .submit-btn{*/
+      /*  width: 250px;*/
+      /*  height: 50px;*/
+      /*  border-radius: 7px;*/
+      /*  font-weight: 700;*/
+      /*  border-color: transparent;*/
+      /*  font-size: 23px;*/
+      /*  background: #fff;*/
+      /*  color: black;*/
+      /* cursor: pointer;*/
+      /*}*/
+      
+      .btn {
+          width: 100%;
+          height: 60px;
+      }
+      
+      
+      
+        </style>
+    </head>
+    
+    
+    <body>
+        
+        <div class="wrapper" align="center">
+            <div id="map" style="width:100%;height:500px;"></div>
+        </div>
+        <div align="center">
+        <form id="position-form" action="position_ok" method="post">
+            <input type="hidden" id = "latitude" name="latitude" value="0" />
+            <input type="hidden" id = "longitude" name="longitude" value="0" />
+            <button type="button" id="position" class="btn btn-info">해당 위치로 설정</button>
+            </form>
+        </div>
+        <p id="message"></p>
+        
+        
+<script>
+       
+       
+            
+          var lat;
+          var lng;
+          var distance;
+          var position_reset;   
+          
+          $(document).ready(function() {
+            if (navigator.geolocation) { // GPS를 지원하면
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    
+                    lat = position.coords.latitude;
+                    lng = position.coords.longitude;
+                    var location = new naver.maps.LatLng(lat, lng);
+                    
+                    var map = new naver.maps.Map('map', {
+                        center: location,
+                        zoom: 10,
+                        mapTypeId: naver.maps.MapTypeId.NORMAL
+                    });
+                    var marker = new naver.maps.Marker({
+                        position: location,
+                        map: map
+                    });
+                    var circle = new naver.maps.Circle({
+                        map: map,
+                        center: location,
+                        radius: 500,
+                        fillColor: '#33FFFF',
+                        fillOpacity: 0.5
+                    });
+                    map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
+                    marker.setPosition(location);
+                    circle.setCenter(location);
+                    
+                    
+                    var infoWindow = new naver.maps.InfoWindow({
+                        anchorSkew: true
+                    });
+                    
+                    map.setCursor('pointer');
+                    
+                    map.addListener('click', function(e) {
+                        searchCoordinateToAddress(e.coord);
+                    });
+                
+                    $('#address').on('keydown', function(e) {
+                        var keyCode = e.which;
+                
+                        if (keyCode === 13) { // Enter Key
+                            searchAddressToCoordinate($('#address').val());
+                        }
+                    });
+                
+                    $('#submit').on('click', function(e) {
+                        e.preventDefault();
+                        searchAddressToCoordinate($('#address').val());
+                    });
+                    
+                    searchCoordinateToAddress(location);
+                    // search by tm128 coordinate
+                    function searchCoordinateToAddress(latlng) {
+                        var tm128 = naver.maps.TransCoord.fromLatLngToTM128(latlng);
+                        position_reset = latlng;
+                        infoWindow.close();
+                    
+                        naver.maps.Service.reverseGeocode({
+                            location: tm128,
+                            coordType: naver.maps.Service.CoordType.TM128
+                        }, function(status, response) {
+                            if (status === naver.maps.Service.Status.ERROR) {
+                                return alert('Something Wrong!');
+                            }
+                    
+                            var items = response.result.items,
+                                htmlAddresses = [];
+                    
+                            for (var i=0, ii=items.length, item, addrType; i<ii; i++) {
+                                item = items[i];
+                                addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]';
+                    
+                                htmlAddresses.push((i+1) +'. '+ addrType +' '+ item.address);
+                            }
+                    
+                            infoWindow.setContent([
+                                    '<div style="padding:10px;min-width:200px;line-height:150%;">',
+                                    '<h4 style="margin-top:5px;">검색 좌표</h4><br />',
+                                    htmlAddresses.join('<br />'),
+                                    '</div>'
+                                ].join('\n'));
+                    
+                            infoWindow.open(map, latlng);
+                        });
+                    }
+                    
+                    // result by latlng coordinate
+                    function searchAddressToCoordinate(address) {
+                        naver.maps.Service.geocode({
+                            address: address
+                        }, function(status, response) {
+                            if (status === naver.maps.Service.Status.ERROR) {
+                                return alert('Something Wrong!');
+                            }
+                    
+                            var item = response.result.items[0],
+                                addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
+                                point = new naver.maps.Point(item.point.x, item.point.y);
+                            lat=item.point.x;
+                            lng=item.point.y;
+                            infoWindow.setContent([
+                                    '<div style="padding:10px;min-width:200px;line-height:150%;">',
+                                    '<h4 style="margin-top:5px;">검색 주소 : '+ response.result.userquery +'</h4><br />',
+                                    addrType +' '+ item.address +'<br />',
+                                    '</div>'
+                                ].join('\n'));
+                    
+                    
+                            map.setCenter(point);
+                            infoWindow.open(map, point);
+                        });
+                    }
+                    
+                        });
+                    } 
+          });
+          
+            var form = document.getElementById("position-form");
+
+            document.getElementById("position").addEventListener("click", function () {
+                
+              document.getElementById("latitude").value = position_reset.y;
+              document.getElementById("longitude").value = position_reset.x;
+              
+              form.submit();
+            });
+          
+       function errorCallback(error){
+
+            document.write("We coulnd't get your location");
+            
+            switch(error.code){
+            
+                case error.PERMISSION_DENIED:
+                
+                document.write("Permission Denied");
+                
+                break;
+                
+                case error.POSITION_UNAVAILABLE:
+                
+                document.write("Position unavailable");
+                
+                break;
+                
+                case error.TIMEOUT:
+                
+                document.write("Timeout");
+                
+                break;
+                
+                case error.UNKNOW_ERROR:
+                
+                document.write("Unknown error");
+                
+                break;
+                
+            }
+            
+        }
+
+            function showPosition(position){
+                      lat = position.coords.latitude;
+                    lng = position.coords.longitude;
+                    var location = new naver.maps.LatLng(lat, lng);
+                    
+                    var map = new naver.maps.Map('map', {
+                        center: location,
+                        zoom: 10,
+                        mapTypeId: naver.maps.MapTypeId.NORMAL
+                    });
+                    var marker = new naver.maps.Marker({
+                        position: location,
+                        map: map
+                    });
+                    var circle = new naver.maps.Circle({
+                        map: map,
+                        center: location,
+                        radius: 500,
+                        fillColor: '#33FFFF',
+                        fillOpacity: 0.5
+                    });
+                    map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
+                    marker.setPosition(location);
+                    circle.setCenter(location);
+                    
+                    
+                    var infoWindow = new naver.maps.InfoWindow({
+                        anchorSkew: true
+                    });
+                    
+                    map.setCursor('pointer');
+                    
+                    map.addListener('click', function(e) {
+                        searchCoordinateToAddress(e.coord);
+                    });
+                
+                    $('#address').on('keydown', function(e) {
+                        var keyCode = e.which;
+                
+                        if (keyCode === 13) { // Enter Key
+                            searchAddressToCoordinate($('#address').val());
+                        }
+                    });
+                
+                    $('#submit').on('click', function(e) {
+                        e.preventDefault();
+                        searchAddressToCoordinate($('#address').val());
+                    });
+                
+                    //searchAddressToCoordinate('조영동 582-6');
+                    searchCoordinateToAddress(location);
+                    // search by tm128 coordinate
+                    function searchCoordinateToAddress(latlng) {
+                        var tm128 = naver.maps.TransCoord.fromLatLngToTM128(latlng);
+                        
+                        infoWindow.close();
+                    
+                        naver.maps.Service.reverseGeocode({
+                            location: tm128,
+                            coordType: naver.maps.Service.CoordType.TM128
+                        }, function(status, response) {
+                            if (status === naver.maps.Service.Status.ERROR) {
+                                return alert('Something Wrong!');
+                            }
+                    
+                            var items = response.result.items,
+                                htmlAddresses = [];
+                    
+                            for (var i=0, ii=items.length, item, addrType; i<ii; i++) {
+                                item = items[i];
+                                addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]';
+                    
+                                htmlAddresses.push((i+1) +'. '+ addrType +' '+ item.address);
+                            }
+                    
+                            infoWindow.setContent([
+                                    '<div style="padding:10px;min-width:200px;line-height:150%;">',
+                                    '<h4 style="margin-top:5px;">검색 좌표</h4><br />',
+                                    htmlAddresses.join('<br />'),
+                                    '</div>'
+                                ].join('\n'));
+                    
+                            infoWindow.open(map, latlng);
+                        });
+                    }
+                    
+                    // result by latlng coordinate
+                    function searchAddressToCoordinate(address) {
+                        naver.maps.Service.geocode({
+                            address: address
+                        }, function(status, response) {
+                            if (status === naver.maps.Service.Status.ERROR) {
+                                return alert('Something Wrong!');
+                            }
+                    
+                            var item = response.result.items[0],
+                                addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
+                                point = new naver.maps.Point(item.point.x, item.point.y);
+                    
+                            infoWindow.setContent([
+                                    '<div style="padding:10px;min-width:200px;line-height:150%;">',
+                                    '<h4 style="margin-top:5px;">검색 주소 : '+ response.result.userquery +'</h4><br />',
+                                    addrType +' '+ item.address +'<br />',
+                                    '</div>'
+                                ].join('\n'));
+                    
+                    
+                            map.setCenter(point);
+                            infoWindow.open(map, point);
+                        });
+                    }
+            }
+            
+            
+           </script>
+
+    </body>
+</html>

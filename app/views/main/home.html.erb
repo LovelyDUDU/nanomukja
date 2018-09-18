@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+
+    .navbar-default .navbar-nav>li>a {
+        color: white;
+        font-size: 17px;
+    }
+    .navbar-default .navbar-brand {
+        color: white;
+        font-size: 30px;
+    }
+    .container-fluid, .form-group, .collapse, .navbar-collapse, .navbar-header {
+        
+        background: linear-gradient(to bottom,#5bc0de 0,#2aabd2 100%);
+    }
+
+    .content {
+        margin-top: 80px;
+        margin-left: 250px;
+        margin-right: 200px;
+    }
+    .photo {
+        margin-bottom: 30px;
+    }
+    
+    html {
+        position: relative;
+        min-height: 100%;
+        margin: 0;
+    }
+    body {
+        min-height: 100%;
+    }
+
+    .footer {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+    	padding: 10px 0;
+    	text-align: center;
+    	color: white;
+    	background-color:#b2edff;
+    }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button> -->
+          <a class="navbar-brand" href="/">Title</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="#">menu</a></li>
+            <li><a href="#">menu</a></li>
+          </ul>
+          <!--<form class="navbar-form navbar-right">-->
+          <!--  <div class="form-group">-->
+          <!--    <input type="text" class="form-control" placeholder="Search">-->
+          <!--  </div>-->
+          <!--  <button type="submit" class="btn btn-default">Submit</button>-->
+          <!--</form>-->
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">menu</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <img src="user.png" width="25" height="25"> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="content">
+      <div class="col-lg-4 col-sm-6 photo">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAG1BMVEXMzMwAAACysrIZGRmZmZkzMzNMTExmZmZ/f3/jLKqNAAACIElEQVR4nO3X6XKDMAxGUfACfv8nLhjwhtgmIu1M7/nVqEFfZRuSdh0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/HHGGLl8v/r7gWGw/cyO1fvNaG9Xn3kn0C1NFyHXx1wdr6qPvBUY+l5qvDSwtm4hV595K3DqO4Rp20yI71430MUL53Js5c6qzwd5JdDlw2fzChU/zivoz6oPfSFwfu+whJVX+W3d5OoH3go06bqx3MewHU+5WhvK7TfD+4Hnfefp92W5Ws9RHmRjLw6DQqDIpZ2ezqbN9e2VXG07pElMccLfCpSNafPq4beFkauVkCeJc5yfBYVAUbqdTFqpaFg6yNWjSW7MoRIoyM8IoYM5qh5McmcOncA9m06Fq/+ItYNclScJN+bQCmwNef7PFmj7DnI1h1pgbb7xrFHpG27NoRh41Lbt4MV77/ghEu+Pq29imoFN2yK6fu5tD3C5ejDHxSSagcdtm+HFD9ompZljuJhEM7Awx1rXFNLr9PCQq9IcY/nJ+HJgEe3L45ouSqcztZOr4hzd2SSqgU20bx4H+REfu9mzqjjHySSqgVnM82ZTVJe9D80/N/uqPMfhJKqBzVIUtttp3v3eeh9/nbZXrtaD5HMc2gOkH3jdNx7JVfOhtK+Wk5T3YxDmUA687ts5v1aq0yFXn/h64LS8bnKzquLrgQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPjPfgCFQQ9yD5vluwAAAABJRU5ErkJggg==" alt="" width="220px" height="220px">
+        <br><input type="checkbox" name=""> <label for="">한식</label>
+      </div>
+      <div class="col-lg-4 col-sm-6 photo">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAG1BMVEXMzMwAAACysrIZGRmZmZkzMzNMTExmZmZ/f3/jLKqNAAACIElEQVR4nO3X6XKDMAxGUfACfv8nLhjwhtgmIu1M7/nVqEFfZRuSdh0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/HHGGLl8v/r7gWGw/cyO1fvNaG9Xn3kn0C1NFyHXx1wdr6qPvBUY+l5qvDSwtm4hV595K3DqO4Rp20yI71430MUL53Js5c6qzwd5JdDlw2fzChU/zivoz6oPfSFwfu+whJVX+W3d5OoH3go06bqx3MewHU+5WhvK7TfD+4Hnfefp92W5Ws9RHmRjLw6DQqDIpZ2ezqbN9e2VXG07pElMccLfCpSNafPq4beFkauVkCeJc5yfBYVAUbqdTFqpaFg6yNWjSW7MoRIoyM8IoYM5qh5McmcOncA9m06Fq/+ItYNclScJN+bQCmwNef7PFmj7DnI1h1pgbb7xrFHpG27NoRh41Lbt4MV77/ghEu+Pq29imoFN2yK6fu5tD3C5ejDHxSSagcdtm+HFD9ompZljuJhEM7Awx1rXFNLr9PCQq9IcY/nJ+HJgEe3L45ouSqcztZOr4hzd2SSqgU20bx4H+REfu9mzqjjHySSqgVnM82ZTVJe9D80/N/uqPMfhJKqBzVIUtttp3v3eeh9/nbZXrtaD5HMc2gOkH3jdNx7JVfOhtK+Wk5T3YxDmUA687ts5v1aq0yFXn/h64LS8bnKzquLrgQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPjPfgCFQQ9yD5vluwAAAABJRU5ErkJggg==" alt="" width="220px" height="220px">
+        <br><input type="checkbox" name=""> <label for="">중식</label>
+      </div>
+      <div class="col-lg-4 col-sm-6 photo">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAG1BMVEXMzMwAAACysrIZGRmZmZkzMzNMTExmZmZ/f3/jLKqNAAACIElEQVR4nO3X6XKDMAxGUfACfv8nLhjwhtgmIu1M7/nVqEFfZRuSdh0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/HHGGLl8v/r7gWGw/cyO1fvNaG9Xn3kn0C1NFyHXx1wdr6qPvBUY+l5qvDSwtm4hV595K3DqO4Rp20yI71430MUL53Js5c6qzwd5JdDlw2fzChU/zivoz6oPfSFwfu+whJVX+W3d5OoH3go06bqx3MewHU+5WhvK7TfD+4Hnfefp92W5Ws9RHmRjLw6DQqDIpZ2ezqbN9e2VXG07pElMccLfCpSNafPq4beFkauVkCeJc5yfBYVAUbqdTFqpaFg6yNWjSW7MoRIoyM8IoYM5qh5McmcOncA9m06Fq/+ItYNclScJN+bQCmwNef7PFmj7DnI1h1pgbb7xrFHpG27NoRh41Lbt4MV77/ghEu+Pq29imoFN2yK6fu5tD3C5ejDHxSSagcdtm+HFD9ompZljuJhEM7Awx1rXFNLr9PCQq9IcY/nJ+HJgEe3L45ouSqcztZOr4hzd2SSqgU20bx4H+REfu9mzqjjHySSqgVnM82ZTVJe9D80/N/uqPMfhJKqBzVIUtttp3v3eeh9/nbZXrtaD5HMc2gOkH3jdNx7JVfOhtK+Wk5T3YxDmUA687ts5v1aq0yFXn/h64LS8bnKzquLrgQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPjPfgCFQQ9yD5vluwAAAABJRU5ErkJggg==" alt="" width="220px" height="220px">
+        <br><input type="checkbox" name=""> <label for="">일식</label>
+      </div>
+      <div class="col-lg-4 col-sm-6 photo">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAG1BMVEXMzMwAAACysrIZGRmZmZkzMzNMTExmZmZ/f3/jLKqNAAACIElEQVR4nO3X6XKDMAxGUfACfv8nLhjwhtgmIu1M7/nVqEFfZRuSdh0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/HHGGLl8v/r7gWGw/cyO1fvNaG9Xn3kn0C1NFyHXx1wdr6qPvBUY+l5qvDSwtm4hV595K3DqO4Rp20yI71430MUL53Js5c6qzwd5JdDlw2fzChU/zivoz6oPfSFwfu+whJVX+W3d5OoH3go06bqx3MewHU+5WhvK7TfD+4Hnfefp92W5Ws9RHmRjLw6DQqDIpZ2ezqbN9e2VXG07pElMccLfCpSNafPq4beFkauVkCeJc5yfBYVAUbqdTFqpaFg6yNWjSW7MoRIoyM8IoYM5qh5McmcOncA9m06Fq/+ItYNclScJN+bQCmwNef7PFmj7DnI1h1pgbb7xrFHpG27NoRh41Lbt4MV77/ghEu+Pq29imoFN2yK6fu5tD3C5ejDHxSSagcdtm+HFD9ompZljuJhEM7Awx1rXFNLr9PCQq9IcY/nJ+HJgEe3L45ouSqcztZOr4hzd2SSqgU20bx4H+REfu9mzqjjHySSqgVnM82ZTVJe9D80/N/uqPMfhJKqBzVIUtttp3v3eeh9/nbZXrtaD5HMc2gOkH3jdNx7JVfOhtK+Wk5T3YxDmUA687ts5v1aq0yFXn/h64LS8bnKzquLrgQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPjPfgCFQQ9yD5vluwAAAABJRU5ErkJggg==" alt="" width="220px" height="220px">
+        <br><input type="checkbox" name=""> <label for="">양식</label>
+      </div>
+      <div class="col-lg-4 col-sm-6 photo">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAG1BMVEXMzMwAAACysrIZGRmZmZkzMzNMTExmZmZ/f3/jLKqNAAACIElEQVR4nO3X6XKDMAxGUfACfv8nLhjwhtgmIu1M7/nVqEFfZRuSdh0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/HHGGLl8v/r7gWGw/cyO1fvNaG9Xn3kn0C1NFyHXx1wdr6qPvBUY+l5qvDSwtm4hV595K3DqO4Rp20yI71430MUL53Js5c6qzwd5JdDlw2fzChU/zivoz6oPfSFwfu+whJVX+W3d5OoH3go06bqx3MewHU+5WhvK7TfD+4Hnfefp92W5Ws9RHmRjLw6DQqDIpZ2ezqbN9e2VXG07pElMccLfCpSNafPq4beFkauVkCeJc5yfBYVAUbqdTFqpaFg6yNWjSW7MoRIoyM8IoYM5qh5McmcOncA9m06Fq/+ItYNclScJN+bQCmwNef7PFmj7DnI1h1pgbb7xrFHpG27NoRh41Lbt4MV77/ghEu+Pq29imoFN2yK6fu5tD3C5ejDHxSSagcdtm+HFD9ompZljuJhEM7Awx1rXFNLr9PCQq9IcY/nJ+HJgEe3L45ouSqcztZOr4hzd2SSqgU20bx4H+REfu9mzqjjHySSqgVnM82ZTVJe9D80/N/uqPMfhJKqBzVIUtttp3v3eeh9/nbZXrtaD5HMc2gOkH3jdNx7JVfOhtK+Wk5T3YxDmUA687ts5v1aq0yFXn/h64LS8bnKzquLrgQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPjPfgCFQQ9yD5vluwAAAABJRU5ErkJggg==" alt="" width="220px" height="220px">
+        <br><input type="checkbox" name=""> <label for="">디저트</label>
+      </div>
+      <div class="col-lg-4 col-sm-6 photo">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAG1BMVEXMzMwAAACysrIZGRmZmZkzMzNMTExmZmZ/f3/jLKqNAAACIElEQVR4nO3X6XKDMAxGUfACfv8nLhjwhtgmIu1M7/nVqEFfZRuSdh0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/HHGGLl8v/r7gWGw/cyO1fvNaG9Xn3kn0C1NFyHXx1wdr6qPvBUY+l5qvDSwtm4hV595K3DqO4Rp20yI71430MUL53Js5c6qzwd5JdDlw2fzChU/zivoz6oPfSFwfu+whJVX+W3d5OoH3go06bqx3MewHU+5WhvK7TfD+4Hnfefp92W5Ws9RHmRjLw6DQqDIpZ2ezqbN9e2VXG07pElMccLfCpSNafPq4beFkauVkCeJc5yfBYVAUbqdTFqpaFg6yNWjSW7MoRIoyM8IoYM5qh5McmcOncA9m06Fq/+ItYNclScJN+bQCmwNef7PFmj7DnI1h1pgbb7xrFHpG27NoRh41Lbt4MV77/ghEu+Pq29imoFN2yK6fu5tD3C5ejDHxSSagcdtm+HFD9ompZljuJhEM7Awx1rXFNLr9PCQq9IcY/nJ+HJgEe3L45ouSqcztZOr4hzd2SSqgU20bx4H+REfu9mzqjjHySSqgVnM82ZTVJe9D80/N/uqPMfhJKqBzVIUtttp3v3eeh9/nbZXrtaD5HMc2gOkH3jdNx7JVfOhtK+Wk5T3YxDmUA687ts5v1aq0yFXn/h64LS8bnKzquLrgQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPjPfgCFQQ9yD5vluwAAAABJRU5ErkJggg==" alt="" width="220px" height="220px">
+        <br><input type="checkbox" name=""> <label for="">기타</label>
+      </div>
+    </div>
+    
+    
+    <div class="footer">
+        Copyright © dong. All rights reserved.
+    </div>
+  </body>
+</html>

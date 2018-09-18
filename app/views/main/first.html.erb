@@ -1,0 +1,345 @@
+ 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <style>
+  
+    
+
+    </style>
+    <script>
+        
+        
+        function write_btn(){
+          
+          if(document.getElementById("current_user_lat").value == "0.0" || document.getElementById("current_user_long").value=="0.0"){
+            alert('주소를 설정한 후 이용바랍니다.');
+            document.getElementById("write_btn").href="/map_page";
+          }
+          
+        }
+        
+        function nextBtn_click(){
+          
+          if(!document.getElementById("current_user_id").value){
+            alert('로그인 후 이용바랍니다.');
+            return;
+          }
+          if(document.getElementById("current_user_lat").value=="0.0" || document.getElementById("current_user_long").value=="0.0"){
+            alert(document.getElementById("current_user_lat").value);
+            alert('위치를 설정한 후 이용바랍니다.');
+            return;
+          }
+          
+          
+          
+          var form = document.getElementById("nextPage");
+          
+          var checkFalseRadius = document.getElementById("radius").value;
+          var checkFalseChk = false;
+          
+          for(i = 1; i<7; i++){
+            if(document.getElementById("chk["+i+"]").checked){
+              checkFalseChk = true;
+              break;
+            }
+          }
+          
+          
+          if(!checkFalseRadius || !checkFalseChk){
+            alert('반경 설정과 카테고리 중 1택 하세요');
+          }
+          else {
+            form.submit();
+          }
+            
+        }
+        
+        
+      $(document).ready(function(){
+          
+          //페이지 열리때 checkbox초기화 
+          $('input[type=checkbox]').prop("checked",false);
+
+          /* CheckBox image */
+          $('.chkbox img').click(function () {
+
+              //console.log("클릭된요소 : "+this );
+              //console.log($(this))
+              //console.log("클릭된요소의 부모요소 : "+ (this.parentElement));
+            //console.log($(this).parent())
+           
+            //체크 박스의 체크 유무를 확인하기 위해 checked값을 얻어옴.
+            var isChecked = $(this).parent().find('input[type=checkbox]').prop("checked"); 
+            if(!isChecked){
+                console.log(isChecked); //boolean값으로 true, false    
+
+                //현재의 체크 상태의 반대값을 저장( true이면 false로 )
+                isChecked = !isChecked;
+                
+                //체크박스의 체크상태와 체크박스 이미지 변경 
+                $(this).parent().find('input[type=checkbox]').prop("checked", isChecked);
+                $(this).parent().css({border:"1px solid green"});
+            }
+            else {
+                console.log(isChecked); //boolean값으로 true, false    
+
+                //현재의 체크 상태의 반대값을 저장( true이면 false로 )
+                isChecked = !isChecked;
+                
+                //체크박스의 체크상태와 체크박스 이미지 변경 
+                $(this).parent().find('input[type=checkbox]').prop("checked", isChecked);
+                $(this).parent().css({border:"none"});
+            }
+            
+          });
+
+        });
+        
+        
+        
+        
+      
+    </script> 
+    
+<style> 
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Ubuntu'); 
+
+body {
+	font-family:'Do Hyeon',sans-serif;
+}
+.navbar-default .navbar-nav>li>a {
+	color:white;
+	font-size:2rem;
+}
+.nav-content {
+}
+.navbar-default .navbar-brand {
+	color:white;
+		font-size:5.5rem;
+	padding-top:17px;
+}
+.container-fluid,.form-group,.collapse,.navbar-collapse,.navbar-header .navbar {
+	background-color:#70afc6;
+}
+label {
+	cursor:pointer;
+}
+.upload {
+	opacity:0;
+	position:absolute;
+	z-index:-1;
+}
+.chkbox input[type=checkbox]{
+  display: none;
+}
+.best-cook-img {
+  border-radius: 50%;
+}
+.img-responsive {
+  height: 90px; !important
+}
+
+
+@media(min-width:1024px) {
+	.container-fluid,.form-group,.collapse,.navbar-collapse,.navbar-header .navbar {
+			background-color:#70afc6;
+			min-height:100px;
+	}
+	.navbar-default .navbar-brand {
+		font-size:5.5rem;
+		padding-top:42px;
+	}
+	.navbar-default .navbar-nav>li>a {
+		font-size:4.5rem;
+	}
+	.nav-content {
+		padding-top:27px;
+	}
+	.profile {
+		-webkit-border-radius:50%;
+			-moz-border-radius:50%;
+			border-radius:50%;
+			border:5px solid rgba(255,255,255,0.5);
+	}
+	.profile-content {
+		padding-top: 12px;
+	}
+}
+</style> 
+    
+  
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="/"  >나눠묵자</a>
+	</div>
+	
+	<div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav nav-content">
+			<% if !current_user.nil? %>
+			<li><a href="/write" onclick="write_btn();" id ="write_btn">글 작성</a></li>
+			<%end%>
+		</ul> 
+		<% if current_user.nil? %>
+		<ul class="nav navbar-nav navbar-right  nav-content"> 
+			<li><%=link_to('로그인', new_user_session_path) %></li>
+			<li><%=link_to('회원가입', new_user_registration_path) %></li>
+		</ul>
+		<%else%>
+		<ul class="nav navbar-nav navbar-right profile-content"> 
+			<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class='profile' src="/sushi.png" width="50" height="50" ><span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<li><span class="font-change"><a href="/profile/<%=current_user.id%>">마이페이지</a></span></li>
+				<li role="separator" class="divider"></li>
+				<li><span class="font-change"><%=link_to "로그아웃", destroy_user_session_path, :method => :delete%></span></li>
+			</ul>
+			</li> 
+		</ul>
+		<%end%>
+	</div>
+</div>
+</nav>
+ 
+    
+         <div class= 'container'>
+           <div class= 'row'>
+             <div class ='col-lg-1 col-lg-offset-3 col-xs-2'>
+              <button class="btn btn-info " onclick="location.href='/map_page';">
+                <i class="fa fa-map-marker"> </i>
+              </button>
+             </div>
+             <form action="/second" id = "nextPage"> 
+             <div class='col-lg-3 col-xs-6'>
+                
+                    <input type="hidden" id = "current_user_id" value="<%=@cur_user.id%>">
+                    <input type="hidden" id = "current_user_lat" value="<%=@cur_user.latitude%>">
+                    <input type="hidden" id = "current_user_long" value="<%=@cur_user.longitude%>"> 
+                  <select name="radius" class="form-control"id="radius"  >
+                    <option value="" disabled selected>반경 설정</option>
+                    <option value="100">100m</option>
+                    <option value="300">300m</option>
+                    <option value="500">500m</option>
+                  </select>
+              
+              </div>
+              <div class = 'col-lg-2 col-xs-4'>
+                <button type="button" id="nextBtn-id" class="btn btn-info" onclick="nextBtn_click();" >음식구경가기</button>
+              </div>
+          </div> 
+        
+    <!--</div>-->
+    <hr>
+      
+      <div class = "row">
+        <div class = 'col-lg-2 col-lg-offset-2 col-xs-4 photo'> 
+            <div class="chkbox" style="text-align: center;">
+              <input type="checkbox" name="chk[1]" value = "korean" id="chk[1]"/>
+              <img src="rice.png"class="img-responsive"   /> 
+              <br>
+              <p style= "font-size:25px;font-weight: bold;">한식</p>
+            </div> 
+        </div>
+        <div class = 'col-lg-2 col-lg-offset-1 col-xs-4  photo'>
+            <div class="chkbox" style="text-align: center;">
+              <input type="checkbox" name="chk[2]" value = "chinese" id="chk[2]"/>
+              <img src="noodles.png"class="img-responsive"   /> 
+              <br>
+              <p style= "font-size:25px;font-weight: bold;">중식</p>
+            </div> 
+        </div>
+        <div class = 'col-lg-2 col-lg-offset-1 col-xs-4  photo'>
+            <div class="chkbox" style="text-align: center;">
+              <input type="checkbox" name="chk[3]" value = "japanese" id="chk[3]"/>
+              <img src="sushi.png"class="img-responsive"   /> 
+              <br>
+              <p style= "font-size:25px;font-weight: bold;">일식</p>
+            </div> 
+        </div> 
+      </div> 
+      
+      <div class = "row">
+        <div class = 'col-lg-2 col-lg-offset-2 col-xs-4   photo'> 
+            <div class="chkbox" style="text-align: center;">
+              <input type="checkbox" name="chk[4]" value = "american" id="chk[4]"/>
+              <img src="spaghetti.png"class="img-responsive"   /> 
+              <br>
+              <p style= "font-size:25px;font-weight: bold;">양식</p>
+            </div> 
+        </div>
+        <div class = 'col-lg-2 col-lg-offset-1 col-xs-4  photo '> 
+            <div class="chkbox" style="text-align: center;">
+              <input type="checkbox" name="chk[5]" value = "dessert" id="chk[5]"/>
+              <img src="cupcake.png"class="img-responsive"   /> 
+              <br>
+              <p style= "font-size:25px;font-weight: bold;">디저트</p>
+            </div> 
+        </div>
+        <div class = 'col-lg-2 col-lg-offset-1 col-xs-4 photo'> 
+            <div class="chkbox" style="text-align: center;">
+              <input type="checkbox" name="chk[6]" value = "etc" id="chk[6]"/>
+              <img src="guitar.png"class="img-responsive"   /> 
+              <br>
+              <p style= "font-size:25px;font-weight: bold;">기타</p>
+            </div> 
+        </div> 
+    </div> 
+        
+        <hr>
+        <h2 align="center">우리동네 요리사</h2> 
+        <div class="row">
+           
+          <div class="col-lg-2 col-lg-offset-2 col-xs-4" align="center">
+            
+            <% if @results.first.id != nil %>
+              <a href="/profile/<%=@results.first.id%>"><img class="best-cook-img img-responsive" src="<%=@photo_addr.first%>" alt="" ></a> 
+            <% else %>
+              <img class="best-cook-img img-responsive" src="<%=@photo_addr.first%>"
+            <% end%>
+            
+            <p><%=@results.first.name%><br><span style="color: gold;">★</span><%=@results.first.star_score%></p>
+          </div>
+          
+          <div class="col-lg-2 col-lg-offset-2 col-xs-4"  align="center"> 
+            <% if @results.second.id !=nil %>
+              <a href="/profile/<%=@results.second.id%>"><img class="best-cook-img img-responsive" src="<%=@photo_addr.second%>" alt="" ></a>
+            <% else %>
+              <img class="best-cook-img img-responsive" src="<%=@photo_addr.second%>" alt="" >
+            <% end %>
+            <p><%=@results.second.name%><br><span style="color: gold;">★</span><%=@results.second.star_score%></p>
+         
+          </div>
+          
+          <div class="col-lg-2 col-lg-offset-2 col-xs-4"  align="center"> 
+            
+            <% if @results.third.id != nil %>
+              <a href="/profile/<%=@results.third.id%>"><img class="best-cook-img img-responsive" src="<%=@photo_addr.third%>" alt=""></a>
+            <% else %>
+              <img class="best-cook-img img-responsive" src="<%=@photo_addr.third%>" alt="">
+            <% end %>
+            <p><%=@results.third.name%><br><span style="color: gold;">★</span><%=@results.third.star_score%></p>
+          </div>
+          
+      </div>
+        
+        
+        
+  </div>
+ </form>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+    
+    <!--<style>-->
+    <!--@media (min-width: 768px){-->
+      
+      
+    <!--  .navbar-default .navbar-nav>li>a {-->
+    <!--      color: white;-->
+    <!--      font-size: 40px;-->
+    <!--      margin-top: 30px;-->
+    <!--      margin-bottom:1px;-->
+    <!--      margin-left: 0px;-->
+    <!--      margin-right: 0px;-->
+    <!--  }-->
+    <!--  .navbar-default .navbar-brand {-->
+    <!--      color: white;-->
+    <!--      font-size: 80px;-->
+    <!--      margin:20px;-->
+    <!--  }-->
+    <!--  .container-fluid, .form-group, .collapse, .navbar-collapse, .navbar-header {-->
+    <!--      background-color: #70afc6;-->
+    <!--      height: 100px;-->
+    <!--  }-->
+    <!--  .dropdown-toggle {-->
+    <!--    margin-top: 10px !important;-->
+    <!--  }-->
+      
+      
+      
+    <!--  .title {-->
+    <!--    font-size: 40px;-->
+    <!--    font-family:'BMJUA','배달의민족 주아',sans-serif;-->
+    <!--    color: #85d9f8; -->
+        
+    <!--    margin-bottom: 30px;-->
+    <!--  }-->
+      
+    <!--  .input-group-addon {-->
+    <!--    font-size: 28px;-->
+    <!--  }-->
+    <!--  .form-control {-->
+    <!--    height: 50px; -->
+    <!--    font-size: 28px;-->
+    <!--  }-->
+      
+    <!--  .form-bottom {-->
+    <!--    margin-top: 10px;-->
+    <!--  }-->
+      
+      
+    <!--  .inline-block {-->
+    <!--    float: left;-->
+    <!--  }-->
+     
+    <!--  .font-change {-->
+    <!--    font-size: 30px;-->
+    <!--  }-->
+      
+    <!--  .rounded-circle {-->
+    <!--    border-radius: 100%;-->
+    <!--    width:200px;-->
+    <!--    height:180px;-->
+    <!--    margin-top:10px;-->
+    <!--    margin-left:10px;-->
+    <!--  }-->
+      
+    <!--  .content-font {-->
+    <!--    font-size: 30px;-->
+    <!--    word-break:break-all;-->
+    <!--  }-->
+      
+    <!--  hr {-->
+    <!--    background-color: #70afc6;-->
+    <!--    height: 1px;-->
+    <!--  }-->
+      
+      
+      
+      
+      
+      
+      
+    <!--  .comment-header {-->
+    <!--    border: 0.5px solid #70afc6;-->
+    <!--    display: table;-->
+    <!--    width:100%;-->
+    <!--  }-->
+      
+    <!--  .comment-content {-->
+    <!--    font-size: 25px;-->
+    <!--    word-break:break-all;-->
+    <!--  }-->
+      
+    <!--  .font-mini {-->
+    <!--    font-size: 12px;-->
+    <!--  }-->
+    <!--/*}*/-->
+    <!--</style>-->
+     
+     
+     
+    
+    <style amp-custom>
+      .rating {
+        --star-size: 2;  /* use CSS variables to calculate dependent dimensions later */
+        padding: 0;  /* to prevent flicker when mousing over padding */
+        border: none;  /* to prevent flicker when mousing over border */
+        unicode-bidi: bidi-override; direction: rtl;  /* for CSS-only style change on hover */
+        text-align: left;  /* revert the RTL direction */
+        user-select: none;  /* disable mouse/touch selection */
+        font-size: 3em;  /* fallback - IE doesn't support CSS variables */
+        font-size: calc(var(--star-size) * 1em);  /* because `var(--star-size)em` would be too good to be true */
+        cursor: pointer;
+        /* disable touch feedback on cursor: pointer - http://stackoverflow.com/q/25704650/1269037 */
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        -webkit-tap-highlight-color: transparent;
+        
+      }
+      /* the stars */
+      .rating > label {
+        display: inline-block;
+        position: relative;
+        width: 1.1em;  /* magic number to overlap the radio buttons on top of the stars */
+        width: calc(var(--star-size) / 3 * 1.1em);
+      }
+      .rating > *:hover,
+      .rating > *:hover ~ label,
+      .rating:not(:hover) > input:checked ~ label {
+        color: transparent;  /* reveal the contour/white star from the HTML markup */
+        cursor: inherit;  /* avoid a cursor transition from arrow/pointer to text selection */
+      }
+      .rating > *:hover:before,
+      .rating > *:hover ~ label:before,
+      .rating:not(:hover) > input:checked ~ label:before {
+        content: "★";
+        position: absolute;
+        left: 0;
+        color: gold;
+      }
+      .rating > input {
+        position: relative;
+        transform: scale(3);  /* make the radio buttons big; they don't inherit font-size */
+        transform: scale(var(--star-size));
+        /* the magic numbers below correlate with the font-size */
+        top: -0.5em;  /* margin-top doesn't work */
+        top: calc(var(--star-size) / 6 * -1em);
+        margin-left: -2.5em;  /* overlap the radio buttons exactly under the stars */
+        margin-left: calc(var(--star-size) / 6 * -5em);
+        z-index: 2;  /* bring the button above the stars so it captures touches/clicks */
+        opacity: 0;  /* comment to see where the radio buttons are */
+        font-size: initial; /* reset to default */
+      }
+      form.amp-form-submit-error [submit-error] {
+        color: red;
+      }
+    </style>
+     
+      
+    <script> 
+      function commentSubmit() {
+        document.getElementById('comment-form').submit();
+      
+      } 
+    </script>
+    
+<style> 
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Ubuntu'); 
+
+body {
+	font-family:'Do Hyeon',sans-serif;
+}
+.navbar-default .navbar-nav>li>a {
+	color:white;
+	font-size:2rem;
+}
+.nav-content {
+}
+.navbar-default .navbar-brand {
+	color:white;
+		font-size:5.5rem;
+	padding-top:17px;
+}
+.container-fluid,.form-group,.collapse,.navbar-collapse,.navbar-header .navbar {
+	background-color:#70afc6;
+}
+label {
+	cursor:pointer;
+}
+.upload {
+	opacity:0;
+	position:absolute;
+	z-index:-1;
+}
+.chkbox input[type=checkbox]{
+  display: none;
+}
+@media(min-width:1024px) {
+	.container-fluid,.form-group,.collapse,.navbar-collapse,.navbar-header .navbar {
+			background-color:#70afc6;
+			min-height:100px;
+	}
+	.navbar-default .navbar-brand {
+		font-size:5.5rem;
+		padding-top:42px;
+	}
+	.navbar-default .navbar-nav>li>a {
+		font-size:4.5rem;
+	}
+	.nav-content {
+		padding-top:27px;
+	}
+	.profile {
+		-webkit-border-radius:50%;
+			-moz-border-radius:50%;
+			border-radius:50%;
+			border:5px solid rgba(255,255,255,0.5);
+	}
+	.profile-content {
+		padding-top: 12px;
+	}
+}
+</style>
+<style>
+  .title{
+    font-size:24px;
+  }
+  .time, .writer{
+    font-size:18px;
+  }
+  .content{
+    font-size:16px;
+  }
+  .comment_title{
+    font-size:16px;
+  }
+  .comment_content{
+    font-size:14px;
+  }
+  .comment_time{
+    font-size:12px;
+  }
+  @media(min-width:1024px)
+  {
+    .time, .writer{
+      font-size:22px
+    }
+    .comment_title{
+      font-size:20px;
+    }
+    .comment_content{
+      font-size:16px;
+    }
+    .comment_time{
+      font-size:14px;
+    }
+  }
+</style>
+</head>
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="/"  >나눠묵자</a>
+	</div>
+	<div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1"> 
+		<ul class="nav navbar-nav navbar-right profile-content">
+			<% if current_user.nil? %>
+			<li><%=link_to('로그인', new_user_session_path) %></li>
+			<li><%=link_to('회원가입', new_user_registration_path) %></li>
+			<%else%>
+			<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class='profile' src="/sushi.png" width="50" height="50" ><span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<li><span class="font-change"><a href="#">마이페이지</a></span></li>
+				<li role="separator" class="divider"></li>
+				<li><span class="font-change"><%=link_to "로그아웃", destroy_user_session_path, :method => :delete%></span></li>
+			</ul>
+			</li>
+			<%end%>
+		</ul>
+	</div>
+</div>
+</nav> 
+ 
+<div class="container">
+  <div class = 'row'>
+    <div class='col-lg-12 col-xs-12'>
+      <p class="title text-info"><%=@post.name%> <span style="color: gold; font-size:30px;">★</span><span style="font-size:30px;"><%=@post.avg_star_score%></span></p>
+    </div>
+  </div> 
+  <div class = 'row'>
+    <div class='col-lg-2 col-xs-4'>
+      <img id="writer-img" src="<%=@user_photo%>" class="img-circle img-responsive" width="100" height = "100">
+    </div>
+    <div class = 'col-lg-10 col-xs-8'>
+      <p class ='writer'>작성자 : <a href="/profile/<%=@user.id%>" style="text-decoration: none;"><%=@user.name%> (<%=@user.email%>)</a> </p>
+      <p class ='time' >작성 날짜 : <%=@post.created_at.to_date%> </p>
+    </div>
+  </div>
+  <hr>
+  <div>
+    <p class= "content">총 가격: <%=@post.total_price%>원</p>
+    <p class= "content">인원수 : <%=@post.people_num%>명 / 1인당 가격 : <%=@post.total_price/@post.people_num%>원</p>
+    <p class= "content">마감기한 : <%=@post.final_date%> </p>
+  </div>
+  <hr>
+  <div class ='row'>
+    <div class='col-lg-6 col-xs-12'> 
+      <p class="content"><%=@post.content%>
+    </div>
+    <div class='col-lg-6 col-xs-12'> 
+      <img id="food-img" class="img-responsive" src="<%=@post.food_photo%>" alt="your image" width="100%" height="450" style="border-radius: 10%;"/>
+    </div>
+  </div>
+  <hr>
+  <div>
+    <form id="comment-form" method="POST" action="/comment_reg">
+          <input type="hidden" name="writer" value="<%=current_user.id%>">
+          <input type="hidden" name="post_id" value="<%=@post.id%>"> 
+          <fieldset class="rating">
+            <input name="rating" type="radio" id="rating5" value="5" on="change:rating.submit" />
+            <label for="rating5" title="5 stars">☆</label>
+        
+            <input name="rating" type="radio" id="rating4" value="4" on="change:rating.submit" />
+            <label for="rating4" title="4 stars">☆</label>
+        
+            <input name="rating" type="radio" id="rating3" value="3" on="change:rating.submit" checked="checked" />
+            <label for="rating3" title="3 stars">☆</label>
+        
+            <input name="rating" type="radio" id="rating2" value="2" on="change:rating.submit" />
+            <label for="rating2" title="2 stars">☆</label>
+        
+            <input name="rating" type="radio" id="rating1" value="1" on="change:rating.submit" />
+            <label for="rating1" title="1 stars">☆</label>
+          </fieldset>
+        
+          <div class="input-group">
+            <textarea name = "content" class="form-control custom-control" rows="2" style="resize:none; font-size:25px"></textarea>
+            <span class="input-group-addon btn btn-info" id="submit-comment" onClick="commentSubmit();">Send</span>
+          </div>
+          
+    </form>
+  </div>
+  <hr>
+  <div>
+    <%@comments.each do |c|%> 
+      <div style="border-bottom: 0.5px dotted #70afc6">
+        <span class="comment_title"><%=User.find(c.writer).email%>&nbsp;&nbsp;</span>
+        <span class="comment_time"><%=c.created_at.to_formatted_s(:db)%>&nbsp;&nbsp;</span>
+        <p class="comment_content"><%=c.content%></p>
+      </div> 
+      <%end%>
+  </div>
+</div>
+    
+    <!--<div class="container">-->
+    <!--	<div class="row">-->
+    <!--		<p class="title"><%=@post.name%> <span style="color: gold; font-size:30px;">★</span><span style="font-size:30px;"><%=@post.avg_star_score%></span></p>-->
+    <!--	</div>-->
+    <!--	<div style="display: table; width: 100%">-->
+    <!--	  <div style="display: table-cell;width: 25%;">-->
+    <!--  	  <img id="writer-img" src="<%=@user_photo%>" class="rounded-circle">-->
+    <!--	  </div>-->
+    <!--  	<div style="display: table-cell; width: 60%; height: 180px; vertical-align:middle;margin-top:20px; margin-left: 30px" >-->
+    <!--  	  <p class= "font-change">작성자 : <a href="/profile/<%=@user.id%>" style="text-decoration: none;"><%=@user.name%> (<%=@user.email%>)</a> </p>-->
+    <!--  	  <p class= "font-change">작성 날짜 : <%=@post.created_at%> </p>-->
+    <!--  	</div>-->
+    <!--  </div>-->
+    	
+    <!--	<hr>-->
+    <!--	<div>-->
+    		<!--한줄로 만드는거-->
+    <!--		<p class= "font-change">총 가격: <%=@post.total_price%>원</p>-->
+    <!--		<p class= "font-change">인원수 : <%=@post.people_num%>명 / 1인당 가격 : <%=@post.total_price/@post.people_num%>원</p>-->
+    <!--		<p class= "font-change">마감기한 : <%=@post.final_date%> </p>-->
+    <!--	</div>-->
+    <!--	<hr>-->
+    <!--  <div>-->
+    <!--    <p class="content-font"><%=@post.content%></p>-->
+        <!-- 내용들어가기 -->
+    <!--  </div>-->
+    	
+    <!--	<div>-->
+    <!--	  <img id="food-img" src="<%=@post.food_photo%>" alt="your image" width="100%" height="450" style="border-radius: 10%;"/>-->
+    <!--	</div>-->
+    	
+    <!--	<hr>-->
+    	
+      
+        <!--<form id="comment-form" method="POST" action="/comment_reg">-->
+        <!--  <input type="hidden" name="writer" value="<%=current_user.id%>">-->
+        <!--  <input type="hidden" name="post_id" value="<%=@post.id%>">-->
+          
+            
+        <!--  <fieldset class="rating">-->
+        <!--    <input name="rating" type="radio" id="rating5" value="5" on="change:rating.submit" />-->
+        <!--    <label for="rating5" title="5 stars">☆</label>-->
+        
+        <!--    <input name="rating" type="radio" id="rating4" value="4" on="change:rating.submit" />-->
+        <!--    <label for="rating4" title="4 stars">☆</label>-->
+        
+        <!--    <input name="rating" type="radio" id="rating3" value="3" on="change:rating.submit" checked="checked" />-->
+        <!--    <label for="rating3" title="3 stars">☆</label>-->
+        
+        <!--    <input name="rating" type="radio" id="rating2" value="2" on="change:rating.submit" />-->
+        <!--    <label for="rating2" title="2 stars">☆</label>-->
+        
+        <!--    <input name="rating" type="radio" id="rating1" value="1" on="change:rating.submit" />-->
+        <!--    <label for="rating1" title="1 stars">☆</label>-->
+        <!--  </fieldset>-->
+        
+        <!--  <div class="input-group">-->
+        <!--    <textarea name = "content" class="form-control custom-control" rows="2" style="resize:none; font-size:25px"></textarea>-->
+        <!--    <span class="input-group-addon btn btn-info" id="submit-comment" onClick="commentSubmit();">Send</span>-->
+        <!--  </div>-->
+          
+        <!--</form>-->
+    <!--  <hr>-->
+      
+      
+      
+      <!-- 여기 each.do 드가야됨 -->
+      
+<!--      <%@comments.each do |c|%>-->
+      
+<!--      <div style="border-bottom: 0.5px dotted #70afc6">-->
+<!--        <span class="font-mini"><%=User.find(c.writer).email%>&nbsp;&nbsp;</span>-->
+<!--        <span class="font-mini"><%=c.created_at%>&nbsp;&nbsp;</span>-->
+<!--        <p class="font-change comment-content"><%=c.content%></p>-->
+<!--      </div>-->
+      
+<!--      <%end%>-->
+      
+<!--	</div>-->
+	
+	
+	 
+<!--</html>-->
+

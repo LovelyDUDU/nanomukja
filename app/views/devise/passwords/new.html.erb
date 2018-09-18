@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.bundle.min.js" integrity="sha384-CS0nxkpPy+xUkNGhObAISrkg/xjb3USVCwy+0/NMzd5VxgY4CMCyTkItmy5n0voC" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.bundle.min.js" integrity="sha384-CS0nxkpPy+xUkNGhObAISrkg/xjb3USVCwy+0/NMzd5VxgY4CMCyTkItmy5n0voC" crossorigin="anonymous"></script>
+        <style>
+            .title{
+                 font-family:'BMJUA','배달의민족 주아',sans-serif;
+                 color : #70afc6;
+                 padding-top : 200px;
+            }
+            .signup{
+                margin-top:50px;
+                font-family:'BMJUA','배달의민족 주아',sans-serif;
+            }
+            .btn{
+                background: #70afc6;
+                color: white;
+                border-radius: 0;
+            }
+            input[type=text] {
+                height: 40px;
+                width: 400px;
+                -webkit-transition: all 0.30s ease-in-out;
+                -moz-transition: all 0.30s ease-in-out;
+                -ms-transition: all 0.30s ease-in-out;
+                -o-transition: all 0.30s ease-in-out;
+                outline: none;
+                padding: 3px 0px 3px 3px;
+                margin: 5px 1px 3px 0px;
+                border: 1px solid #DDDDDD;
+                border-radius: 10px;
+
+            }
+            .email{
+                height: 40px;
+                width: 400px;
+                -webkit-transition: all 0.30s ease-in-out;
+                -moz-transition: all 0.30s ease-in-out;
+                -ms-transition: all 0.30s ease-in-out;
+                -o-transition: all 0.30s ease-in-out;
+                outline: none;
+                margin: 0px 5px 5px 0px;
+                border: 1px solid #DDDDDD;
+                border-radius: 10px;
+            }
+            .password{
+                height: 40px;
+                width: 400px;
+                -webkit-transition: all 0.30s ease-in-out;
+                -moz-transition: all 0.30s ease-in-out;
+                -ms-transition: all 0.30s ease-in-out;
+                -o-transition: all 0.30s ease-in-out;
+                outline: none;
+                margin: 0px 5px 5px 0px;
+                border: 1px solid #DDDDDD;
+                border-radius: 10px;
+            }
+            .password_confirmation{
+                height: 40px;
+                width: 400px;
+                -webkit-transition: all 0.30s ease-in-out;
+                -moz-transition: all 0.30s ease-in-out;
+                -ms-transition: all 0.30s ease-in-out;
+                -o-transition: all 0.30s ease-in-out;
+                outline: none;
+                margin: 0px 5px 5px 0px;
+                border: 1px solid #DDDDDD;
+                border-radius: 10px;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div class="signup" align=center>
+            <div class="title">
+                <h1>비밀번호 찾기</h1>
+            </div>
+            <div class="form">
+                <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+                    <table>
+                        <tr>
+                            <td>아이디 입력 <br></td>
+                            <td colspan="3"><%= f.input :email,required: true,label: false, autofocus: true,input_html: { autocomplete: "email" } %></td>
+                        </tr>
+
+
+                        <tr>
+                            <td align="center" colspan="3">
+                                <div class="form-actions"><%= f.button :submit, "초기 비밀번호 받기" %></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" colspan="3"><br><br><br><br>
+                                <%- if controller_name != 'sessions' %><%= link_to "로그인 화면으로", new_session_path(resource_name) %><br /><% end -%>
+                            </td>
+                        </tr>
+
+                    </table>
+                <% end %>
+            </div>
+    </body>
+</html>

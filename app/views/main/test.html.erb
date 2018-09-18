@@ -1,0 +1,64 @@
+<div class="modal fade in" aria-hidden="false" id="setEventConditionsModal" data-backdrop="static">
+    <div class="modal-backdrop fade in" style="height: 100%"></div>
+    <div class="modal-dialog" style="left: 0!important; width: 65%">
+        <div class="modal-content" style="width: 100%">
+            <div class="modal-header">
+                <button type="reset" class="close" data-toggle="modal" data-dismiss="modal" id="closeModal">x</button>
+                <div>
+                    <div>
+                        <h4 class="modal-title">Events</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="panel panel-inverse">
+                    <div class="panel-heading">
+                        <h3 class="panel-title text-left"> <a class="accordion-toggle accordion-toggle-styled collapsed" id="test" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> <i class="fa fa-plus-circle pull-right"></i> Selected Events </a> </h3>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse">
+                        <div class="panel-body text-left" id="demo"></div>
+                    </div>
+                </div>
+                <div class="panel panel-inverse">
+                    <div class="panel-heading">
+                        <h3 class="panel-title text-left"> <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"> <i class="fa fa-plus-circle pull-right"></i> Edit Conditions </a> </h3>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" style="margin-bottom: -25px">
+                        <div class="panel-body text-left">
+                            <div class="col-md-4">
+                                <label>Creditor Name Match</label>
+                                <select id="creditorName-dropdown"></select>
+                                <p></p>
+                                <label>Client</label>
+                                <select id="client-dropdown" multiple="multiple"></select>
+                                <p></p>
+                                <label style="margin-top: 7px">Accuracy</label>
+                                <select id="accuracy-dropdown"></select>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Chapter</label>
+                                <select id="chapter-dropdown" multiple="multiple"></select>
+                                <p></p>
+                                <label>Division</label>
+                                <select id="division-dropdown" multiple="multiple"></select>
+                                <p></p>
+                                <label style="margin-top: 2.5%">Workflow</label>
+                                <select id="workflow-dropdown"></select>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Jurisdiction</label>
+                                <select id="jurisdiction-dropdown" multiple="multiple"></select>
+                                <p></p>
+                                <label>Unit</label>
+                                <select id="unit-dropdown" multiple="multiple"></select>
+                            </div>
+                        </div>                            
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" id="insertButton" class="btn btn-success"><i class="fa fa-floppy-o"></i> Save</button>
+            </div>
+        </div>
+    </div>
+</div>

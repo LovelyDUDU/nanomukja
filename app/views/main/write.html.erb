@@ -1,0 +1,265 @@
+ 
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    
+ 
+      
+<script>
+    
+      function submitBtn() {
+        document.getElementById('write-form').submit();
+      }
+      
+      $(function() {
+            $("#imgInp").on('change', function(){
+                readURL(this);
+            });
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+              reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+    </script>
+<style> 
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Ubuntu'); 
+
+body {
+	font-family:'Do Hyeon',sans-serif;
+}
+.navbar-default .navbar-nav>li>a {
+	color:white;
+	font-size:2rem;
+}
+.nav-content {
+}
+.navbar-default .navbar-brand {
+	color:white;
+		font-size:5.5rem;
+	padding-top:17px;
+}
+.container-fluid,.form-group,.collapse,.navbar-collapse,.navbar-header .navbar {
+	background-color:#70afc6;
+}
+label {
+	cursor:pointer;
+}
+.upload {
+	opacity:0;
+	position:absolute;
+	z-index:-1;
+}
+@media(min-width:1024px) {
+	.container-fluid,.form-group,.collapse,.navbar-collapse,.navbar-header .navbar {
+			background-color:#70afc6;
+			min-height:100px;
+	}
+	.navbar-default .navbar-brand {
+		font-size:5.5rem;
+		padding-top:42px;
+	}
+	.navbar-default .navbar-nav>li>a {
+		font-size:4.5rem;
+	}
+	.nav-content {
+		padding-top:27px;
+	}
+	.profile {
+		-webkit-border-radius:50%;
+			-moz-border-radius:50%;
+			border-radius:50%;
+			border:5px solid rgba(255,255,255,0.5);
+	}
+	.profile-content {
+		padding-top: 12px;
+	}
+}
+</style> 
+</head>
+   
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="/"  >나눠묵자</a>
+	</div>
+	<div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1"> 
+		<ul class="nav navbar-nav navbar-right profile-content">
+			<% if current_user.nil? %>
+			<li><%=link_to('로그인', new_user_session_path) %></li>
+			<li><%=link_to('회원가입', new_user_registration_path) %></li>
+			<%else%>
+			<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class='profile' src="/sushi.png" width="50" height="50" ><span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<li><span class="font-change"><a href="/profile/<%=current_user.id%>">마이페이지</a></span></li>
+				<li role="separator" class="divider"></li>
+				<li><span class="font-change"><%=link_to "로그아웃", destroy_user_session_path, :method => :delete%></span></li>
+			</ul>
+			</li>
+			<%end%>
+		</ul>
+	</div>
+</div>
+</nav>
+
+<form action="/write_ok" method="post" enctype="multipart/form-data" id="write-form">
+  <input type="hidden" name="post_lat" value="<%=current_user.latitude%>">
+  <input type="hidden" name="post_long" value="<%=current_user.longitude%>">
+  
+  <div class = 'container'>
+    <div class='row'>
+      <div class = 'col-md-6 col-sm-12'> 
+        <div class ="row">
+          <div class= 'col-lg-6 col-xs-12'>
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="basic-addon1">제목</span>
+              <input type="text" class="form-control" aria-describedby="basic-addon1" name="name" required> 
+            </div>   
+          </div>
+          <div class= 'col-lg-6 col-xs-12'> 
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon">종류</span>
+                <select class="form-control" name="category">
+                  <option value="korean">한식</option>
+                  <option value="chinese">중식</option>
+                  <option value="japanese">일식</option>
+                  <option value="american">양식</option>
+                  <option value="dessert">디저트</option>
+                  <option value="etc">기타</option>
+                </select> 
+            </div> 
+          </div> 
+        </div> 
+        <hr>
+         <div class="input-group input-group-lg">
+          <span class="input-group-addon">내용</span>
+          <textarea class="form-control" rows="8" name="content" style ="height:200px" required></textarea>     
+        </div> 
+        <hr>
+        <div class='row'>
+          <div class="col-lg-6 col-xs-6">
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon">총가격</span>
+              <input type="number" class="form-control" name="total_price" id = "total_price" min=1 required>
+            </div>
+          </div>   
+          <div class='col-lg-6 col-xs-6'>
+            <div class="input-group input-group-lg ">
+              <span class="input-group-addon">인원수</span>
+              <input type="number" class="form-control" name="people_num" id = "people_num" min=1 required> 
+            </div>
+           
+          </div>   
+        </div> 
+        
+        <div class='row'>
+          <div class="col-lg-12 col-xs-12">
+             <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="basic-addon1">마감일</span>
+              <input type="date" class="form-control" name="final_date" required>
+            </div>
+          </div> 
+        </div>
+        <hr class="visible-xs">
+    </div>
+    
+      <div class="col-md-6 col-sm-12">
+        <div class="input-group">
+          <span class="input-group-addon">사진</span> 
+            <img id="blah"  src="default.png" alt="your image" width="100%" height="350" > 
+        </div>
+        <div class='col-md-6 col-md-offset-6 col-xs-12'>
+          <div class="filebox"style="text-align:right">
+                <label for="imgInp" style="font-size:24px">사진 찾아보기</label> 
+                <input type="file" id="imgInp" class="upload" accept="image/*" name="food_photo"/>
+          </div>
+        </div>
+        <hr class="visible-xs">
+        <div class='col-md-3 col-md-offset-9 col-xs-12'>
+          <input type="submit" class="btn" value="등록" style ="width:100%;font-size:20px;background-color:#70afc6;color:white;">
+          <!--<button type="button" id= "submit-btn" value="등록" class="btn btn-primary" onclick="submitBtn();"></button>-->
+        </div>
+      </div>  
+    </div>
+  </div>
+</form>
+    
+     
+    <!--<div class="container">-->
+    <!--  <div class="title">-->
+    <!--    <span>음식 등록</span>-->
+    <!--  </div>-->
+    <!--  <div class="input-group">-->
+    <!--    <span class="input-group-addon" id="basic-addon1">제목</span>-->
+    <!--    <input type="text" class="form-control" aria-describedby="basic-addon1" name="name"> -->
+    <!--  </div>-->
+      
+      <!--<div class="input-group">-->
+      <!--  <span class="input-group-addon">사진</span>-->
+        
+      <!--    <img id="blah" src="default.png" alt="your image" width=auto height="200"/>-->
+      <!--    <div class="filebox">-->
+      <!--      <label for="imgInp">쓰고 싶은 말</label> -->
+      <!--      <input type="file" id="imgInp" class="upload" accept="image/*" name="food_photo"/>-->
+      <!--    </div>-->
+
+      <!--</div>-->
+      
+    <!--  <div class="input-group textarea-custom">-->
+    <!--    <span class="input-group-addon">내용</span>-->
+    <!--    <textarea class="form-control custom-control" rows="8" name="content"></textarea>     -->
+    <!--  </div>-->
+      
+      
+      
+    <!--  <div class="input-group form-bottom">-->
+    <!--    <span class="input-group-addon" style="padding: 0px 22px">총 가격</span>-->
+    <!--    <input type="text" class="form-control" name="total_price" id = "total_price">-->
+    <!--    <span class="input-group-addon">인원 수</span>-->
+    <!--    <input type="text" class="form-control" name="people_num" id = "people_num">-->
+    <!--  </div>-->
+    <!--  <div class="input-group">-->
+    <!--    <span class="input-group-addon" id="basic-addon1">마감기한</span>-->
+    <!--    <input type="date" class="form-control" name="final_date" >-->
+    <!--    <span class="input-group-addon">카테고리</span>-->
+    <!--    <select class="form-control" name="category">-->
+    <!--      <option value="korean">한식</option>-->
+    <!--      <option value="chinese">중식</option>-->
+    <!--      <option value="japanese">일식</option>-->
+    <!--      <option value="american">양식</option>-->
+    <!--      <option value="dessert">디저트</option>-->
+    <!--      <option value="etc">기타</option>-->
+    <!--  </select>-->
+    <!--  </div>-->
+      
+      
+    <!--  <div align="right" style="margin-top: 15px">-->
+    <!--    <button type="button" id= "submit-btn" value="등록" class="btn btn-primary" onclick="submitBtn();">-->
+    <!--  </div>-->
+    <!--</div>-->
+    <!--</form>--> 

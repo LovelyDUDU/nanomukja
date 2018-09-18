@@ -1,0 +1,254 @@
+ 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+       <meta name="viewport" content="width=device-width, initial-scale=1">  
+        <!--<style>-->
+        <!--    .navbar-default .navbar-nav>li>a {-->
+        <!--        color: white;-->
+        <!--        font-size: 40px;-->
+        <!--        margin-top: 30px;-->
+        <!--        margin-bottom:1px;-->
+        <!--        margin-left: 0px;-->
+        <!--        margin-right: 0px;-->
+        <!--    }-->
+        <!--    .navbar-default .navbar-brand {-->
+        <!--        color: white;-->
+        <!--        font-size: 80px;-->
+        <!--        margin:20px;-->
+        <!--    }-->
+        <!--    .container-fluid, .form-group, .collapse, .navbar-collapse, .navbar-header {-->
+        <!--        background-color: #70afc6;-->
+        <!--        height: 100px;-->
+        <!--    }    -->
+        <!--    td {-->
+        <!--        font-size: 40px;-->
+        <!--        font-family:'BMJUA','배달의민족 주아',sans-serif;-->
+        <!--        padding: 15px;-->
+        <!--    }-->
+            
+        <!--    .title{-->
+        <!--        text-align:center;-->
+        <!--        font-size: 130px;-->
+        <!--         font-family:'BMJUA','배달의민족 주아',sans-serif;-->
+        <!--         color : #70afc6;-->
+        <!--    }-->
+        <!--    .signup{-->
+        <!--        margin-top:50px;-->
+        <!--        font-family:'BMJUA','배달의민족 주아',sans-serif;-->
+        <!--    }-->
+        <!--    .btn{-->
+        <!--        background: #70afc6;-->
+        <!--        color: white;-->
+        <!--        border-radius: 0;-->
+        <!--        font-size: 50px;-->
+        <!--        width: 500px;-->
+        <!--        height: 100px;-->
+        <!--        border-radius: 20px;-->
+        <!--    }-->
+        <!--    input[type=text] {-->
+        <!--        height: 70px;-->
+        <!--        width: 600px;-->
+        <!--        -webkit-transition: all 0.30s ease-in-out;-->
+        <!--        -moz-transition: all 0.30s ease-in-out;-->
+        <!--        -ms-transition: all 0.30s ease-in-out;-->
+        <!--        -o-transition: all 0.30s ease-in-out;-->
+        <!--        outline: none;-->
+        <!--        padding: 3px 0px 3px 3px;-->
+        <!--        margin: 5px 1px 3px 0px;-->
+        <!--        border: 1px solid #DDDDDD;-->
+        <!--        border-radius: 10px;-->
+
+        <!--    }-->
+            
+        <!--    .email{-->
+        <!--        height: 70px;-->
+        <!--        width: 600px;-->
+        <!--        -webkit-transition: all 0.30s ease-in-out;-->
+        <!--        -moz-transition: all 0.30s ease-in-out;-->
+        <!--        -ms-transition: all 0.30s ease-in-out;-->
+        <!--        -o-transition: all 0.30s ease-in-out;-->
+        <!--        outline: none;-->
+        <!--        margin: 0px 5px 5px 0px;-->
+        <!--        border: 1px solid #DDDDDD;-->
+        <!--        border-radius: 10px;-->
+        <!--    }-->
+        <!--    .phone{-->
+        <!--        height: 70px;-->
+        <!--        width: 600px;-->
+        <!--        -webkit-transition: all 0.30s ease-in-out;-->
+        <!--        -moz-transition: all 0.30s ease-in-out;-->
+        <!--        -ms-transition: all 0.30s ease-in-out;-->
+        <!--        -o-transition: all 0.30s ease-in-out;-->
+        <!--        outline: none;-->
+        <!--        margin: 0px 5px 5px 0px;-->
+        <!--        border: 1px solid #DDDDDD;-->
+        <!--        border-radius: 10px;-->
+        <!--    }-->
+        <!--    .password{-->
+        <!--        height: 70px;-->
+        <!--        width: 600px;-->
+        <!--        -webkit-transition: all 0.30s ease-in-out;-->
+        <!--        -moz-transition: all 0.30s ease-in-out;-->
+        <!--        -ms-transition: all 0.30s ease-in-out;-->
+        <!--        -o-transition: all 0.30s ease-in-out;-->
+        <!--        outline: none;-->
+        <!--        margin: 0px 5px 5px 0px;-->
+        <!--        border: 1px solid #DDDDDD;-->
+        <!--        border-radius: 10px;-->
+        <!--    }-->
+        <!--    .password_confirmation{-->
+                
+        <!--    }-->
+            
+            
+        <!--</style>-->
+        
+     <style>
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Ubuntu');
+body  {
+	font-family:'Do Hyeon',sans-serif;
+	height: 100%;
+}
+a {
+	color:#70afc6;
+}
+a:link {
+	text-decoration:none;
+} 
+.background {
+  position: fixed; 
+  top: 0;   
+  min-width: 100%;
+  min-height: 100%;
+  opacity: 0.4;
+} 
+.form-select{
+    height:100%;
+}
+</style>  
+     <img class='background'src="/eattogether.jpg">    
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %><%= f.error_notification %>
+    <div class = 'container'> 
+        <br><br><br><br><br><br>
+        <div class='col-lg-12'>
+            <center>
+            <p style='font-size:96px;color:#70afc6;'>회원가입</p>
+            </center>
+        </div>
+        
+        <div class='col-lg-4 col-lg-offset-4'>
+            <div class='form-group'> 
+                <%= f.input :email,label: false, required: true,autofocus: true ,input_html: { autocomplete: "email",class:"form-control"},placeholder:"이메일"%> 
+            </div>
+        </div>
+        <div class='col-lg-4 col-lg-offset-4'>
+            <div class='form-group'> 
+                <%= f.input :password,label: false, required: true,placeholder: ("#{@minimum_password_length} ~ 10 자리 영문 혼합입니다." if @minimum_password_length),input_html: { autocomplete: "new-password",class:"form-control" } %>
+            </div>
+        </div>
+        <div class='col-lg-4 col-lg-offset-4'>
+            <div class='form-group'> 
+             <%= f.input :password_confirmation,label: false, required: true,input_html: { autocomplete: "new-password", class:'form-control'},placeholder: ("#{@minimum_password_length} ~ 10 자리 영문 혼합입니다." if @minimum_password_length) %>
+             </div>
+        </div> 
+        <div class='row' style="margin: 0px 0.3%;">
+            <div class='col-lg-2 col-lg-offset-4 col-xs-6'>
+                <div class='form-group'> 
+                 <%= f.input :name, label: false,  required: true,input_html: {  class:'form-control'}, placeholder:"이름" %>
+                 </div>
+            </div>
+            <div class='col-lg-2 col-xs-6'>
+                <%= f.select(:gender, [ '남성', '여성' ],{},  { :class => 'form-control' })%>
+            </div>
+        </div>
+        <div class='col-lg-4 col-lg-offset-4'>
+            <div class='form-group'> 
+             <%= f.input :birthdate, label: false, required: true,input_html: {  class:'form-control'}, placeholder:"생년월일"%>
+             </div>
+        </div>
+        <div class='col-lg-4 col-lg-offset-4'>
+            <div class='form-group'> 
+             <%= f.input :email_confirm, label: false, required: true,input_html: {  class:'form-control'}, placeholder:"본인인증 이메일"%>
+             </div>
+        </div>
+        <div class='col-lg-4 col-lg-offset-4'>
+            <div class='form-group'> 
+             <%= f.input :phone,  label: false, required: true,input_html: {class:'form-control'}, placeholder:"전화번호" %>
+             </div>
+        </div>
+        <div class='col-lg-4 col-lg-offset-4'>
+            <div class='form-group' style="text-align:right"> 
+             <%= f.submit "가입 신청",class:'btn btn-info'%>
+             </div>
+        </div> 
+        <div class='col-lg-12'>
+            <center>
+                <a href="/users/sign_in" style='font-size:24px'>로그인 하러가기</a>
+            </center>
+        </div>
+         
+    </div>        
+    <% end %>    
+        
+        
+        
+        
+        <!--<div class="signup" align=center>-->
+        <!--    <div class="title">-->
+        <!--        회원가입-->
+        <!--    </div>-->
+        <!--    <div class="form">-->
+        <!--        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %><%= f.error_notification %>-->
+        <!--            <table>-->
+        <!--                <tr>-->
+        <!--                    <td>아이디<br></td>-->
+        <!--                    <td colspan="3"><%= f.input :email,label: false, required: true,autofocus: true ,input_html: { autocomplete: "email" }%></td>-->
+        <!--                </tr>-->
+        <!--                <tr>-->
+        <!--                    <td>비밀번호<br></td>-->
+        <!--                    <td colspan="3"><%= f.input :password,label: false, required: true,placeholder: ("#{@minimum_password_length} ~ 10 자리 영문 혼합입니다." if @minimum_password_length),input_html: { autocomplete: "new-password" } %></td>-->
+        <!--                </tr>-->
+        <!--                <tr>-->
+        <!--                    <td>비밀번호 재확인<br></td>-->
+        <!--                    <td colspan="3"><%= f.input :password_confirmation,label: false, required: true,input_html: { autocomplete: "new-password" } %></td>-->
+        <!--                </tr>-->
+        <!--                <tr>-->
+        <!--                    <td>이름</td>-->
+        <!--                    <td colspan="3"><%= f.input :name, label: false,  required: true%>-->
+        <!--                </tr>-->
+        <!--                <tr>-->
+        <!--                    <td>생년월일</td>-->
+        <!--                    <td colspan="3"><%= f.input :birthdate, label: false, required: true%></td>-->
+        <!--                </tr>-->
+        <!--                <tr>-->
+        <!--                    <td>본인 확인 이메일</td>-->
+        <!--                    <td colspan="3"><%= f.input :email_confirm, label: false, required: true%></td>-->
+        <!--                </tr>-->
+        <!--                <tr>-->
+        <!--                    <td>휴대전화</td>-->
+        <!--                    <td colspan="3"><%= f.input :phone, label: false, required: true %></td>-->
+        <!--                </tr>-->
+        <!--                <tr>-->
+        <!--                    <td>성별</td>-->
+        <!--                    <td colspan="10" align="left">-->
+        <!--                        <div class="btn-group" data-toggle="buttons">-->
+        <!--                           <%= f.select(:gender, [ '남성', '여성' ], {}, { :class => 'select' }) %>-->
+        <!--                        </div>-->
+        <!--                    </td>-->
+        <!--                </tr>-->
+
+        <!--                <tr>-->
+        <!--                    <td align="center" colspan="3">-->
+        <!--                        <div class="form-actions"><%= f.submit "가입 신청", :class => 'btn'%></div>-->
+        <!--                    </td>-->
+        <!--                </tr>-->
+                        <!--<tr>-->
+                        <!--    <td align="center" colspan="3"><br><br><br><br>-->
+                        <!--        <%- if controller_name != 'sessions' %><%= link_to "로그인 화면으로", new_session_path(resource_name) %><br /><% end -%>-->
+                        <!--    </td>-->
+                        <!--</tr>-->
+
+        <!--            </table>-->
+        <!--        <% end %>-->
+        <!--    </div> -->

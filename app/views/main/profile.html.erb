@@ -1,0 +1,665 @@
+<meta charset="UTF-8">
+<meta http-equiv='content-type' content='text/html; charset=utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+ 
+<style>
+     
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Ubuntu'); 
+body {
+	font-family:'Do Hyeon',sans-serif;
+}
+.navbar-default .navbar-nav>li>a {
+	color:white;
+	font-size:2rem;
+	
+}
+.nav-content{
+    
+}
+.navbar-default .navbar-brand {
+	color:white; 
+	font-size:5.5rem;
+	padding-top:17px;
+}
+.container-fluid,.form-group,.collapse,.navbar-collapse,.navbar-header .navbar  {
+	background-color: #70afc6;
+}  
+    
+@media(min-width:1024px){ 
+    .container-fluid,.form-group,.collapse,.navbar-collapse,.navbar-header .navbar  {
+    	background-color: #70afc6;
+    	min-height:100px;
+    } 
+    .navbar-default .navbar-brand {
+        font-size:5.5rem; 
+        padding-top:42px;
+         
+    }
+    .navbar-default .navbar-nav>li>a { 
+        font-size:4.5rem;
+    }
+    .nav-content{
+        padding-top:27px;
+    }
+    
+    label {
+       cursor: pointer;
+       /* Style as you please, it will become the visible UI component. */
+    }
+    
+    .upload {
+       opacity: 0;
+       position: absolute;
+       z-index: -1;
+    }
+    .profile{ 
+        -webkit-border-radius:50%;
+    	-moz-border-radius:50%;
+    	border-radius:50%;
+    	border:5px solid rgba(255,255,255,0.5);
+     
+    }
+    .profile-content{
+      padding-top:12px;
+    }
+}
+</style> 
+  </head>
+  <body>
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="/"  >나눠묵자</a>
+	</div>
+	<div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
+		
+		
+    	<% if current_user.nil? %>
+		<ul class="nav navbar-nav navbar-right  nav-content"> 
+			<li><%=link_to('로그인', new_user_session_path) %></li>
+			<li><%=link_to('회원가입', new_user_registration_path) %></li>
+		</ul>
+		<%else%>
+		<ul class="nav navbar-nav navbar-right profile-content"> 
+			<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class='profile' src="/sushi.png" width="50" height="50" ><span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<li><span class="font-change"><a href="/profile/<%=current_user.id%>">마이페이지</a></span></li>
+				<li role="separator" class="divider"></li>
+				<li><span class="font-change"><%=link_to "로그아웃", destroy_user_session_path, :method => :delete%></span></li>
+			</ul>
+			</li> 
+		</ul>
+		<%end%>
+	</div>
+</div>
+</nav>
+     
+    
+   
+    
+    
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-3 col-lg-offset-4 col-sm-12"> 
+            <div class="card hovercard"> 
+                    <% if @user.id == current_user.id then %>
+                    <button class="cardheader" data-toggle="modal" data-target=".modal1"></button>                      
+                    <% else %>
+                    <button class="cardheader" data-toggle="modal" data-target=".modal1" disabled="disabled"></button>                      
+                    <%end%>
+                    <div class="modal fade bs-example-modal-sm modal1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                      <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                              <form action="/back_photo_reg" method="post" id="back_photo_form" enctype="multipart/form-data">
+                                <input type="hidden" name="user_id" value="<%=current_user.id%>">
+                              <div class="input-group">  
+                                  <% if @user.back_photo_addr.to_s == "" %>
+                                  <img id="blah1" src="/default.png" alt="your image" width="100%" height=auto />
+                                  <%else%>
+                                  <img id="blah1" src="<%=@user.back_photo_addr%>" alt="your image" width="100%" height=auto  />
+            
+                                  <%end%>
+                                  <div class="filebox">
+                                      <label for="imgInp1">배경 사진 변경</label>
+                                      <input type="file" id="imgInp1" class="upload" accept="image/*" name="photo_addr"/>   
+                                      
+                                  </div>  
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target=".modal1">
+                                    <i class="fa fa-times-circle"> </i>
+                                </button>  
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".modal1" onClick="back_photo();">
+                                    <i class="fa fa-check-circle"> </i>
+                                </button>  
+                              </div>
+                              </form>
+                        </div>
+                        </div>
+                      </div> 
+                      
+                      
+                    <div class="avatar"> 
+                        <% if @user.id == current_user.id %>
+                        <button class='imgbutton' data-toggle="modal" data-target=".modal2" ></button>
+                        <% else %>
+                        <button class='imgbutton' data-toggle="modal" data-target=".modal2" disabled="disabled"></button>
+                        <%end%>
+                    </div>
+                    
+                    <div class="modal fade bs-example-modal-sm modal2" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                      <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            
+                            <form action="/profile_photo_reg" method="post" id="profile_photo_form" enctype="multipart/form-data">
+                                <input type="hidden" name="user_id" value="<%=current_user.id%>">
+                            <div class="input-group">  
+                              <img id="blah2" src="/default.png" alt="your image" width="100%" height=auto />
+                              <div class="filebox">  
+                                <label for="imgInp2">프로필 사진 변경</label>
+                                <input type="file" id="imgInp2" class="upload" accept="image/*" name="photo_addr" /> 
+                              </div>
+                    
+                            </div>
+                          
+                          
+                            <div class="modal-footer">
+                                 <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target=".modal2">
+                                    <i class="fa fa-times-circle"> </i>
+                                </button>  
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target=".modal2" onclick="profile_photo();">
+                                    <i class="fa fa-check-circle" > </i>
+                                </button>  
+                            </div>
+                            </form>
+                        </div>
+                      </div>
+                    </div>  
+               <div class="info">
+                    <div class="title">
+                        <p><%=@user.name%></p>
+                    </div>
+                    <div class="desc">
+                        <%=@user.introduce%>
+                    </div> 
+                    <% if @user.id == current_user.id %>
+                    
+                    <button class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#exampleModal">
+                            <i class="fa fa-pencil-square-o"> </i>
+                    </button>
+                    
+                    <% end %>
+                </div> 
+                <div class="bottom">
+                    <div class="following-table" align="center">
+                        <div style="border-right: 1px solid #eee">
+                            <p>게시글<br><%=@results.length%></p>
+                        </div>
+                        <div style="border-right: 1px solid #eee">
+                            <p>팔로워<br><%=@user_follower.length%></p>
+                        </div>
+                        <div>
+                            <p>팔로잉<br><%=@user_following.length%></p>
+                        </div>
+                    </div>
+                    <div class="follow-btn">
+                    <% if @user.id != current_user.id %>
+                        <% if !@isFollow %>
+                        <button type="button" id="nextBtn-id" class="btn-info btn-follow" onclick="followBtn(<%=@user.id%>);">팔로우 신청</button>
+                        <% else %>
+                        <button type="button" id="nextBtn-id" class="btn-default btn-follow" onclick="cancelFollowBtn(<%=@user.id%>);">팔로우 취소</button>
+                        <% end %>
+                    <%end%>
+                    </div>
+                </div>
+            </div> 
+        </div> 
+	</div>
+	
+	<div class="row" style="margin: 5px 0px 0px 5px;">
+	    <div class="col-lg-3 col-lg-offset-4 col-sm-12"> 
+	    <div style="float:left;">
+            <p style="margin: 0px;width: 100px;">histroy</p>
+        </div>
+        
+        <% if current_user.id == @user.id%>
+        <div style="float:right; width:100px;margin-left: 50px; ">
+            <form action="/read_message" method="post">
+                <input type="submit" id="message_read" class="btn-info btn-follow" value="메세지 확인">
+            </form>
+        </div>
+        <% else %>
+        <div style="float:right; width: 100px;">
+            <form action="/send_message" method="post">
+                <input type="hidden" name="user_id" value="<%=@user.id%>">
+                <input type="submit" id="message_send" class="btn-info btn-follow" value="메세지 전송"/>
+            </form>
+        </div>
+        <%end%>
+	</div>
+	</div>
+	</div>
+	
+	<div class="container">
+	<div class="row">
+		<div class="col-lg-3 col-lg-offset-4 col-sm-12"> 
+	<div class="list">
+	        
+                        	<%@results.each do |p|%>
+                                <div class="item">
+                                
+                                <div style="float:left;width:110px;height:110px;">
+                                    
+                                    <% if p.food_photo.to_s !="" %>
+                                    <a href="/read/<%=p.id%>"><img style="border-radius: 20%;" src="<%=p.food_photo%>" alt="" width="110px" height="110px"></a>
+                                    <% else %>
+                                    <a href="/read/<%=p.id%>"><img style="border-radius: 20%;" src="/rice.png" alt="" width="110px" height="110px"></a>
+                                    <% end %>
+                                
+                                </div>
+                                
+                                <div style="padding-left: 20px; display: table-cell;vertical-align: middle; height:110px;">
+                                    <a href="/read/<%=p.id%>" style="text-decoration: none;">
+                                        <p class="font-change">Food : <%=p.name%> </p>
+                                        <p class="font-change">Content : <%=p.content%> </p>
+                                        <p class="font-change">Deadline : <%=p.final_date%> </p>
+                                        <div>
+                                            <div style="float:left;">
+                                                <p class="font-mini" width="100px"><span style="color: gold">★</span><%=p.avg_star_score%></p> 
+                                            </div>
+                                            </a>
+                                            <% if current_user.id == @user.id%>
+                                            <div style="float:right">
+                                                <form action="/post_update" method="post" id = "postUpdatForm" style="float:left; margin-right:2px">
+                                                    <input type="hidden" name="post_id" value="<%=p.id%>">
+                                                    <input type="submit" value="수정" id="postUpdate-btn" class="btn-info btn-post-update" onclick="postUpdateBtn();">
+                                                </form>
+                                                <form action="/post_delete" method="post" id="postDeleteForm" style="float:left;">
+                                                    <input type="hidden" name="post_id" value="<%=p.id%>">
+                                                    <button type="button" id="postDelete-btn" class="btn-info btn-post-delete" onclick="postDeleteBtn();">삭제</button>
+                                                </form>
+                                            </div>
+                                            <% end %>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+                                
+                                <hr>
+                            <%end%>
+        </div>
+        </div>
+        </div>
+                       
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"> 
+      <div class="modal-body"> 
+        <form action = "/profile_introduce_reg" method="post" id = "profile_introduce_reg">
+            <input type="hidden" name="user_id" value="<%=current_user.id%>">
+          <div class="form-group"> 
+            <textarea class="form-control" id="message-text" name ="content" rows="8"  placeholder="자기소개 변경"></textarea>
+          </form>
+          </div>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+        <button type="button" class="btn btn-primary btn-sm" value ="변경" onclick="introduce_reg();"><i class="fa fa-check-circle"></i> </button>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+<style>
+.imgbutton {
+	background:url(<%=@profile_photo%>);
+	background-size:cover;
+	width:100px;
+	height:100px;
+	-webkit-border-radius:50%;
+	-moz-border-radius:50%;
+	border-radius:50%;
+	border:5px solid rgba(255,255,255,0.5);
+}
+.card {
+	padding-top:20px;
+	margin:10px 0 20px </div>rgba(214,224,226,0.2);
+	border-top-width:0;
+	border-bottom-width:2px;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+	box-shadow:none;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.card .card-heading {
+	padding:0 20px;
+	margin:0;
+}
+.card .card-heading.simple {
+	font-size:20px;
+	font-weight:300;
+	color:#777;
+	border-bottom:1px solid #e5e5e5;
+}
+.card .card-heading.image img {
+	display:inline-block;
+	width:46px;
+	height:46px;
+	margin-right:15px;
+	vertical-align:top;
+	border:0;
+	-webkit-border-radius:50%;
+	-moz-border-radius:50%;
+	border-radius:50%;
+}
+.card .card-heading.image .card-heading-header {
+	display:inline-block;
+	vertical-align:top;
+}
+.card .card-heading.image .card-heading-header h3 {
+	margin:0;
+	font-size:14px;
+	line-height:16px;
+	color:#262626;
+}
+.card .card-heading.image .card-heading-header span {
+	font-size:12px;
+	color:#999999;
+}
+.card .card-body {
+	padding:0 20px;
+	margin-top:20px;
+}
+.card .card-media {
+	padding:0 20px;
+	margin:0 -14px;
+}
+.card .card-media img {
+	max-width:100%;
+	max-height:100%;
+}
+.card .card-actions {
+	min-height:30px;
+	padding:0 20px 20px 20px;
+	margin:20px 0 0 0;
+}
+.card .card-comments {
+	padding:20px;
+	margin:0;
+	background-color:#f8f8f8;
+}
+.card .card-comments .comments-collapse-toggle {
+	padding:0;
+	margin:0 20px 12px 20px;
+}
+.card .card-comments .comments-collapse-toggle a,.card .card-comments .comments-collapse-toggle span {
+	padding-right:5px;
+	overflow:hidden;
+	font-size:12px;
+	color:#999;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+.card-comments .media-heading {
+	font-size:13px;
+	font-weight:bold;
+}
+.card.people {
+	position:relative;
+	display:inline-block;
+	width:170px;
+	height:300px;
+	padding-top:0;
+	margin-left:20px;
+	overflow:hidden;
+	vertical-align:top;
+}
+.card.people:first-child {
+	margin-left:0;
+}
+.card.people .card-top {
+	position:absolute;
+	top:0;
+	left:0;
+	display:inline-block;
+	width:170px;
+	height:150px;
+	background-color:#ffffff;
+}
+.card.people .card-top.green {
+	background-color:#53a93f;
+}
+.card.people .card-top.blue {
+	background-color:#427fed;
+}
+.card.people .card-info {
+	position:absolute;
+	top:150px;
+	display:inline-block;
+	width:100%;
+	overflow:hidden;
+	background:#ffffff;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.card.people .card-info .title {
+	display:block;
+	margin:8px 14px 0 14px;
+	overflow:hidden;
+	font-size:16px;
+	font-weight:bold;
+	line-height:18px;
+	color:#404040;
+}
+.card.people .card-info .desc {
+	display:block;
+	margin:8px 14px 0 14px;
+	overflow:hidden;
+	font-size:12px;
+	line-height:16px;
+	color:#737373;
+	text-overflow:ellipsis;
+}
+.card.people .card-bottom {
+	position:absolute;
+	bottom:0;
+	left:0;
+	display:inline-block;
+	width:100%;
+	padding:10px 20px;
+	line-height:29px;
+	text-align:center;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.card.hovercard {
+	position:relative;
+	padding-top:0;
+	overflow:hidden;
+	text-align:center;
+	background-color:rgba(214,224,226,0.2);
+}
+.card.hovercard .cardheader {
+	background:url(<%=@back_photo%>);
+	background-size:cover;
+	height:160px;
+	width:100%;
+	border:none;
+}
+.card.hovercard .avatar {
+	position:relative;
+	top:-50px;
+	margin-bottom:-50px;
+}
+.card.hovercard .avatar img {
+	width:100px;
+	height:100px;
+	max-width:100px;
+	max-height:100px;
+	-webkit-border-radius:50%;
+	-moz-border-radius:50%;
+	border-radius:50%;
+	border:5px solid rgba(255,255,255,0.5);
+}
+.card.hovercard .info {
+	padding:4px 8px 10px;
+}
+.card.hovercard .info .title {
+	margin-bottom:4px;
+	font-size:24px;
+	line-height:1;
+	color:#262626;
+	vertical-align:middle;
+}
+.card.hovercard .info .desc {
+	overflow:hidden;
+	font-size:12px;
+	line-height:20px;
+	color:#737373;
+	text-overflow:ellipsis;
+}
+.card.hovercard .bottom {
+	padding:0 20px;
+	margin-bottom:17px;
+}
+.btn {
+	border-radius:50%;
+	width:32px;
+	height:32px;
+	line-height: 18px;
+}
+.list {
+     margin-top: 10px;
+     
+     
+}
+.item p {
+    margin-bottom: 2px;
+}
+hr {
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.following-table {
+    display:inline-block;
+    width: 120px;
+    height: 40px;
+}
+.following-table div {
+    float:left;
+    width:40px;
+    height: 40px;
+}
+.btn-follow {
+    width: 100px;
+}
+.btn-default {
+    width: 100px;
+}
+.btn-post-delete {
+    width: 38px;
+}
+.btn-post-update {
+    width: 38px;
+}
+
+
+</style>
+<script> 
+
+      function back_photo () {
+          var form = document.getElementById('back_photo_form');
+          form.submit();
+      }
+      
+      function profile_photo() {
+          var form = document.getElementById('profile_photo_form');
+          form.submit();
+      }
+      function introduce_reg() {
+          var form = document.getElementById('profile_introduce_reg');
+          form.submit();
+      }
+      function cancelFollowBtn(user_id){
+          document.location.href="/follow_cancel/"+user_id;
+      }
+      function followBtn(receive){
+          document.location.href="/follow_request/"+receive;
+      }
+      function postDeleteBtn(){
+          var isDelete = confirm('삭제하시겠습니까?');
+          if(isDelete){
+              var form = document.getElementById('postDeleteForm');
+              form.submit();
+          }
+      }
+    //   function postUpdateBtn(post_id){
+    //       document.location.href="/post_update/"+post_id;
+    //   }
+      
+      $(function() {
+            $("#imgInp1").on('change', function(){
+                readURL2(this);
+            });
+        });
+
+        function readURL2(input) {
+            if (input.files && input.files[0]) {
+            var reader1 = new FileReader();
+
+            reader1.onload = function (e) {
+                    $('#blah1').attr('src', e.target.result);
+                }
+
+              reader1.readAsDataURL(input.files[0]);
+            }
+        }
+        
+        $(function() {
+            $("#imgInp2").on('change', function(){
+                readURL(this);
+            });
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                    $('#blah2').attr('src', e.target.result);
+                }
+
+              reader.readAsDataURL(input.files[0]);
+            }
+        }
+    
+</script>
+ 

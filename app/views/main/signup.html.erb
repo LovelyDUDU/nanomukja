@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+        
+        
+        <style>
+            .title{
+                 font-family:'BMJUA','배달의민족 주아',sans-serif;
+                 color : #85d9f8;
+            }
+            .signup{
+                margin-top:50px;
+                font-family:'BMJUA','배달의민족 주아',sans-serif;
+            }
+            .btn{
+                background: #85d9f8;
+                color: white;
+                border-radius: 0;
+            }
+            input[type=text] {
+                height: 40px;
+                width: 400px;
+                -webkit-transition: all 0.30s ease-in-out;
+                -moz-transition: all 0.30s ease-in-out;
+                -ms-transition: all 0.30s ease-in-out;
+                -o-transition: all 0.30s ease-in-out;
+                outline: none;
+                padding: 3px 0px 3px 3px;
+                margin: 5px 1px 3px 0px;
+                border: 1px solid #DDDDDD;
+                border-radius: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        
+        
+        
+        
+        <div class="signup" align=center>
+            <div class="title">
+                <h1>회원가입</h1>
+            </div>
+            <div class="form">
+                <form action="">
+                    <table>
+                        <tr>
+                            <td>아이디<br></td>
+                            <td colspan="3"><input type="text" name=""></td>
+                        </tr>
+                        <tr>
+                            <td>비밀번호<br></td>
+                            <td colspan="3"><input type="text" name="sinup[pw]" placeholder="6~10자리 영문 혼합입니다."></td>
+                        </tr>
+                        <tr>
+                            <td>비밀번호 재확인<br></td>
+                            <td colspan="3"><input type="text" name="sinup[re-pw]"></td>
+                        </tr>
+                        <tr>
+                            <td>이름</td>
+                            <td colspan="3"><input type="text" name="sinup[name]"></td>
+                        </tr>
+                        <tr>
+                            <td>생년월일</td>
+                            <td colspan="3"><input type="text" name="sinup[rrn]" placeholder="ex) 960921"></td>
+                        </tr>
+                        <tr>
+                            <td>본인 확인 이메일</td>
+                            <td colspan="3"><input type="text" name="sinup[email]"></td>
+                        </tr>
+                        <tr>
+                            <td>휴대전화</td>
+                            <td colspan="3"><input type="text" name="sinup[phone]"placeholder="ex) 01064897714"></td>
+                        </tr>
+                        <tr>
+                            <td>성별</td>
+                            <td colspan="10" align="left">
+                                <div class="form-group col-md-4">
+                                    <select id="inputState" class="form-control" width:100px;>
+                                        <option>남자</option>
+                                        <option>여자</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="center" colspan="3">
+                                <a href="#" button type="button" class="btn">가입신청</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" colspan="3"><br><br><br><br>
+                                <%- if controller_name != 'sessions' %><%= link_to "Log in", new_session_path(resource_name) %><br /><% end -%>
+                            </td>
+                        </tr>
+
+                    </table>
+                </form>
+            </div>
+    </body>
+</html>

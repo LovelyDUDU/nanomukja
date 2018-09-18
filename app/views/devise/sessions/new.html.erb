@@ -1,0 +1,188 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<script>
+               
+</script>
+<style>
+        /*    body {*/
+                
+        /*    }*/
+        /*    .main {*/
+        /*        margin-top: 200px;*/
+        /*        font-family:'BMJUA','배달의민족 주아',sans-serif;*/
+        /*    }*/
+            
+        /*    .title {*/
+        /*        font-size: 130px;*/
+        /*        margin-bottom: 100px;*/
+        /*    }*/
+            /* a {color: #70afc6; }*/
+
+            /*a:link {*/
+            /*    text-decoration: none;*/
+            /*}*/
+        /*    input[type=text] {*/
+        /*        height: 40px;*/
+        /*        width: 400px;*/
+        /*        -webkit-transition: all 0.30s ease-in-out;*/
+        /*        -moz-transition: all 0.30s ease-in-out;*/
+        /*        -ms-transition: all 0.30s ease-in-out;*/
+        /*        -o-transition: all 0.30s ease-in-out;*/
+        /*        outline: none;*/
+        /*        padding: 3px 0px 3px 3px;*/
+        /*        margin: 5px 1px 3px 0px;*/
+        /*        border: 1px solid #DDDDDD;*/
+        /*        border-radius: 10px;*/
+                
+        /*    }*/
+        /*    input[type=text]:focus {*/
+        /*        box-shadow: 0 0 5px rgba(81, 203, 238, 1);*/
+        /*        padding: 3px 0px 3px 3px;*/
+        /*        margin: 5px 1px 3px 0px;*/
+        /*        border: 1px solid rgba(81, 203, 238, 1);*/
+        /*    }*/
+        /*    button{*/
+        /*        height: 38px;*/
+        /*        width: 400px;*/
+        /*        padding-left: 0px;*/
+        /*        padding-right: 0px;*/
+        /*    }*/
+        /*    .btn{*/
+        /*        background: #70afc6;*/
+        /*        color: white;*/
+        /*    }*/
+        /*    table {*/
+        /*        border-collapse:separate; */
+        /*        border-spacing: 0 3px;*/
+        /*    }*/
+        /*    .email{*/
+        /*        height: 80px;*/
+        /*        width: 700px;*/
+        /*        -webkit-transition: all 0.30s ease-in-out;*/
+        /*        -moz-transition: all 0.30s ease-in-out;*/
+        /*        -ms-transition: all 0.30s ease-in-out;*/
+        /*        -o-transition: all 0.30s ease-in-out;*/
+        /*        outline: none;*/
+        /*        margin: 0px 5px 5px 0px;*/
+        /*        border: 1px solid #DDDDDD;*/
+        /*        border-radius: 10px;*/
+        /*        font-size:40px;*/
+        /*    }*/
+        /*    .password{*/
+        /*        height: 80px;*/
+        /*        width: 700px;*/
+        /*        -webkit-transition: all 0.30s ease-in-out;*/
+        /*        -moz-transition: all 0.30s ease-in-out;*/
+        /*        -ms-transition: all 0.30s ease-in-out;*/
+        /*        -o-transition: all 0.30s ease-in-out;*/
+        /*        outline: none;*/
+        /*        margin: 0px 5px 5px 0px;*/
+        /*        border: 1px solid #DDDDDD;*/
+        /*        border-radius: 10px;*/
+        /*        font-size:40px;*/
+        /*    }*/
+        /*    .btn{*/
+        /*        height: 80px;*/
+        /*        width: 700px;*/
+        /*        font-size: 50px;*/
+        /*        border-radius: 10px;*/
+        /*    }*/
+        /*    .forgot_password, .go_sign_up {*/
+        /*        font-size: 40px;*/
+        /*    }*/
+        /*@font-face{*/
+        /*    font-family:'BMJUA','배달의민족 주아',sans-serif;*/
+        /*}*/
+        </style>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Ubuntu');
+body  {
+	font-family:'Do Hyeon',sans-serif;
+	height: 100%;
+}
+a {
+	color:#70afc6;
+}
+a:link {
+	text-decoration:none;
+} 
+.background {
+  position: fixed; 
+  top: 0;   
+  min-width: 100%;
+  min-height: 100%;
+  opacity: 0.4;
+} 
+</style>
+<img class='background'src="/eattogether.jpg">    
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %> 
+    <div class = 'container'> 
+        <br><br><br><br><br><br>
+        <div class='col-lg-12'>
+            <center>
+            <a href='/' style ="font-size:96px">나눠묵자</a>
+            </center>
+        </div>
+        
+        <div class='col-lg-4 col-lg-offset-4'>
+            <div class='form-group'> 
+                <%= f.input :email, label: false,  placeholder: " 이메일", required: false, autofocus: true, input_html: { autocomplete: "email",class:"form-control"} %>
+            </div>
+        </div>
+        <div class='col-lg-4 col-lg-offset-4'>
+            <div class='form-group'> 
+                <%= f.input :password, label: false, placeholder: " 비밀번호", required: false, input_html: { autocomplete: "current-password",class:"form-control" }  %>
+            </div>
+        </div>
+        <div class='col-lg-4 col-lg-offset-4'>
+            <div class='form-group'> 
+             <%= f.button :submit, "로그인",  style:"width:100%;background-color:#70afc6" %>
+             </div>
+        </div>
+        <div class='col-lg-4 col-lg-offset-4'>
+            <div>
+                <span>
+                   <%- if devise_mapping.registerable? && controller_name != 'registrations' %><%= link_to "회원가입", new_registration_path(resource_name),style:"font-size:24px;" %><br><% end%>
+               </span>
+               <span>
+                   <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %><%= link_to "비밀번호 찾기", new_password_path(resource_name),style:"font-size:24px;" %><br /><% end%>
+               </span> 
+               
+            </div>
+        </div> 
+    </div>        
+    <% end %> 
+        <!--<div class="main" align = center>-->
+        <!--    <div class="title">-->
+        <!--       <a href="/">나눠묵자</a>-->
+        <!--    </div>-->
+        <!--    <div class="form">-->
+        <!--        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>-->
+        <!--            <table>-->
+        <!--                <tr>-->
+        <!--                    <td colspan="3"><%= f.input :email, label: false, placeholder: " ID", required: false, autofocus: true, input_html: { autocomplete: "email" } %></td>-->
+        <!--                </tr>-->
+        <!--                <tr>-->
+        <!--                    <td colspan="3"><%= f.input :password, label: false, placeholder: " Password", required: false, input_html: { autocomplete: "current-password" } %></td>-->
+        <!--                </tr>-->
+        <!--                <tr>-->
+        <!--                    <td align="center" colspan="3">-->
+        <!--                        <div class="form-actions"><div class="button"><%= f.button :submit, "로그인" %></div></div>-->
+        <!--                    </td>-->
+        <!--                </tr>-->
+        <!--                <tr>-->
+        <!--                    <td align="left" class="forgot_password">-->
+        <!--                        <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %><%= link_to "비밀번호 찾기", new_password_path(resource_name) %><br /><% end -%>-->
+        <!--                    </td>-->
+        <!--                    <td align="right" class="go_sign_up">-->
+        <!--                        <%- if devise_mapping.registerable? && controller_name != 'registrations' %><%= link_to "회원가입", new_registration_path(resource_name) %><br /><% end -%>-->
+        <!--                    </td>-->
+        <!--                </tr>-->
+        <!--            </table>-->
+        <!--            <% end %>-->
+            
+                
+        <!--    </div>-->
+        <!--</div> -->
